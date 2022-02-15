@@ -1,9 +1,9 @@
-import DepartmentList from './components/DepartmentList';
+import DepartmentsList from './components/DepartmentsList';
 
 function App() {
   return (
     <div className="App">
-      <DepartmentList />
+      <DepartmentsList />
     </div>
   );
 }

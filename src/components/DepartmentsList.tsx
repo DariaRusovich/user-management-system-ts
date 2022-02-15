@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const DepartmentList:FC = () => {
+const DepartmentsList:FC = () => {
   return (
     <section className="section">
       <div className="container section-wrap">
@@ -14,4 +14,4 @@ const DepartmentList:FC = () => {
   );
 };
 
-export default DepartmentList;
+export default DepartmentsList;
