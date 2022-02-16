@@ -1,21 +1,25 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { IDepartment } from '../types/types';
 
+interface IDepartmentProps {
+  department: IDepartment;
+}
 
-
-const Department: FC = () => {
+const Department: FC<IDepartmentProps> = ({ department }) => {
+  const { picture, name, description } = department;
   return (
     <div className="department-item item-block">
       <img
         className="item__img"
-        src=""
+        src={picture}
         width="1"
         height="1"
         loading="lazy"
         alt="Avatar"
       />
-      <h2 className="department-item__title item__title title">{}</h2>
-      <p className="department-item__description">{}</p>
+      <h2 className="department-item__title item__title title">{name}</h2>
+      <p className="department-item__description">{description}</p>
       <div className="btns-group">
         <button className="btn btn-primary">Edit</button>
         <button className="btn btn-danger">Delete</button>

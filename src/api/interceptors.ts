@@ -14,8 +14,11 @@ export const api: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use((config: AxiosRequestConfig)  => {
-    (config.headers ??= {}).Authorization = `Bearer ${localStorage.getItem('token')}`
+api.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    (config.headers ??= {}).Authorization = `Bearer ${localStorage.getItem(
+      'token'
+    )}`;
     return config;
   },
   (error) => {
@@ -23,3 +26,11 @@ api.interceptors.request.use((config: AxiosRequestConfig)  => {
   }
 );
 
+api.interceptors.response.use(
+  (response) => {
+    return [null, response.data];
+  },
+  (error) => {
+    return [error, null];
+  }
+);

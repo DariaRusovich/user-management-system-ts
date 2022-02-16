@@ -1,9 +1,12 @@
 import DepartmentsList from './components/DepartmentsList';
+import LoginForm from './components/LoginForm';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
     <div className="App">
-      <DepartmentsList />
+      <LoginPage/>
+     
     </div>
   );
 }

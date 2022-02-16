@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import './styles/ButtonsStyles.css';
 import './styles/CommonStyles.css';
+import './styles/FormStyles.css'
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
