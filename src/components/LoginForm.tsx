@@ -5,7 +5,6 @@ interface ILoginFormProps{
     signin: (loginData: ILoginData) => Promise<void>
 }
 
-
 const LoginForm: FC<ILoginFormProps> = ({signin}) => {
   const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
