@@ -1,9 +1,8 @@
-import DepartmentsList from './components/DepartmentsList';
-import LoginForm from './components/LoginForm';
 import LoginPage from './pages/LoginPage';
 import { Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import PrivateRoute from './hoc/PrivateRoute';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <DepartmentsList />
+              <HomePage />
             </PrivateRoute>
           }
         ></Route>

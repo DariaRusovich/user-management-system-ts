@@ -4,15 +4,20 @@ import { IDepartment } from '../types/types';
 import Department from './Department';
 
 const DepartmentsList: FC = () => {
-  const [departments, setDepartments] = useState<IDepartment[]>([]);
+  const [departmentsData, setDepartmentsData] = useState<IDepartment[]>([]);
+
   useEffect(() => {
     getDepartmentItems();
   }, []);
-  async function getDepartmentItems() {
-    const departments = await getDepartments();
-    console.log(departments);
 
-    if (departments) {
+  async function getDepartmentItems() {
+    const [departmentsDataError, departmentsData] = await getDepartments();
+    console.log(departmentsData);
+
+    if (departmentsData) {
+      const departments = departmentsData.departments.departments;
+      console.log(departments);
+      setDepartmentsData(departments);
     } else {
     }
   }
@@ -25,7 +30,7 @@ const DepartmentsList: FC = () => {
           <div className="form-wrap"></div>
         </div>
         <div className="item-list">
-          {departments.map((department) => (
+          {departmentsData.map((department) => (
             <Department
               key={department._id}
               department={department}

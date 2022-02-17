@@ -5,11 +5,12 @@ import LoginForm from '../components/LoginForm';
 import { ILoginData } from '../types/types';
 import { Cookie } from '../utils/cookie';
 
-
 const LoginPage: FC = () => {
   const navigate = useNavigate()
   async function signIn(loginData: ILoginData) {
     const [userDataError, userData] = await signin(loginData);
+    console.log(userData);
+    
     if (!userDataError) {
       const accessToken = userData.user?.tokens.accessToken
       const refreshToken = userData.user?.tokens.refreshToken
