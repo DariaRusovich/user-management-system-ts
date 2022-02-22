@@ -5,7 +5,8 @@ import {
   LOGOUT_URL,
   EMPLOYEES_URL,
 } from '../constants/urls';
-import { IDepartmentsData, ILoginData } from '../types/types';
+import { IDepartmentsData } from '../types/departments';
+import { ILoginData } from '../types/types';
 import { api } from './interceptors';
 
 export function getDepartments(limit:number = 10, page:number = 1):Promise<IDepartmentsData[]> {

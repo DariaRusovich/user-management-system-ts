@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { IDepartment } from '../types/types';
+import { IDepartment } from '../types/departments';
 
 interface IDepartmentProps {
   department: IDepartment;

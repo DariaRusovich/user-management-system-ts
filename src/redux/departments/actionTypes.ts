@@ -1,4 +1,3 @@
-
 export enum DepartmentsActionTypes {
     SET_DEPARTMENTS = 'SET_DEPARTMENTS',
     FETCH_START = 'FETCH_START',
