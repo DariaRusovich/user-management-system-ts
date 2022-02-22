@@ -12,13 +12,11 @@ const DepartmentsList: FC = () => {
 
   async function getDepartmentItems() {
     const [departmentsDataError, departmentsData] = await getDepartments();
-    console.log(departmentsData);
-
     if (departmentsData) {
       const departments = departmentsData.departments.departments;
-      console.log(departments);
       setDepartmentsData(departments);
     } else {
+      alert(departmentsDataError);
     }
   }
 
