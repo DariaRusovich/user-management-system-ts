@@ -4,8 +4,12 @@ import { IErrorResponse } from './types';
 export interface IDepartment {
   name: string;
   description: string;
-  _id: string;
+  _id?: string;
   picture?: string;
+}
+export interface IDepartmentData {
+  department: IDepartment;
+  error: IErrorResponse
 }
 export interface IDepartmentsData {
   departments: IDepartments;
@@ -23,6 +27,7 @@ export interface IResults {
 }
 export interface IDepatmentsState {
   departments: IDepartment[];
+  department?: IDepartment;
   loading: boolean;
   error: null | string;
 }
@@ -35,7 +40,7 @@ interface ISetDepartments {
 }
 interface IAddDepartment {
   type: DepartmentsActionTypes.ADD;
-  payload: IDepartment[];
+  payload: IDepartment;
 }
 interface IFetchError {
   type: DepartmentsActionTypes.FETCH_ERROR;

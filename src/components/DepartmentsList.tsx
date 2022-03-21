@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
+import AddDepartmentForm from './AddDepartmentForm';
 import Department from './Department';
 
 const DepartmentsList: FC = () => {
@@ -17,6 +18,7 @@ const DepartmentsList: FC = () => {
       <div className="container section-wrap">
         <div className="wrapper">
           <button className="btn btn-success">+ Add department</button>
+          <AddDepartmentForm/>
           <div className="form-wrap"></div>
         </div>
         <div className="item-list">
