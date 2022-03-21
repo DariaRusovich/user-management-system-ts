@@ -1,36 +1,40 @@
-import { DepartmentsActionTypes } from "../redux/departments/actionTypes";
+import { DepartmentsActionTypes } from '../redux/departments/actionTypes';
+import { IErrorResponse } from './types';
 
 export interface IDepartment {
-    name: string;
-    description: string;
-    _id: string;
-    picture?: string;
-  }
-  export interface IDepartmentsData {
-    departments: IDepartments;
-    results?: IResults;
-  }
-  export interface IDepartments {
-    departments: IDepartment[];
-  }
-  export interface IResults {
-    currentPage: number;
-    limit: number;
-    sortBy: string;
-    total: number;
-  }
-  
+  name: string;
+  description: string;
+  _id: string;
+  picture?: string;
+}
+export interface IDepartmentsData {
+  departments: IDepartments;
+  results?: IResults;
+  error: IErrorResponse
+}
+export interface IDepartments {
+  departments: IDepartment[];
+}
+export interface IResults {
+  currentPage: number;
+  limit: number;
+  sortBy: string;
+  total: number;
+}
 export interface IDepatmentsState {
   departments: IDepartment[];
   loading: boolean;
   error: null | string;
 }
-
 interface IFetchStart {
   type: DepartmentsActionTypes.FETCH_START;
 }
 interface ISetDepartments {
-  type: DepartmentsActionTypes.SET_DEPARTMENTS;
+  type: DepartmentsActionTypes.SET;
+  payload: IDepartment[];
+}
+interface IAddDepartment {
+  type: DepartmentsActionTypes.ADD;
   payload: IDepartment[];
 }
 interface IFetchError {
@@ -44,4 +48,5 @@ export type ActionType =
   | IFetchStart
   | ISetDepartments
   | IFetchError
-  | IFetchEnd;
+  | IFetchEnd
+  | IAddDepartment

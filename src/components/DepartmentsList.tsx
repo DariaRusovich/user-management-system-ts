@@ -1,29 +1,16 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-//import { getDepartments } from '../api/apiServise';
-import { fetchDepartments } from '../redux/departments/action';
+import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
-//import { IDepartment } from '../types/departments';
 import Department from './Department';
 
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
-  const dispatch = useDispatch()
-  //const [departmentsData, setDepartmentsData] = useState<IDepartment[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDepartments())
+    dispatch(fetchDepartments());
   }, []);
-
-  // async function getDepartmentItems() {
-  //   const [departmentsDataError, departmentsData] = await getDepartments();
-  //   if (departmentsData) {
-  //     const departments = departmentsData.departments.departments;
-  //     setDepartmentsData(departments);
-  //   } else {
-  //     alert(departmentsDataError);
-  //   }
-  // }
 
   return (
     <section className="section">
@@ -37,7 +24,7 @@ const DepartmentsList: FC = () => {
             <Department
               key={department._id}
               department={department}
-            ></Department>
+            />
           ))}
         </div>
       </div>

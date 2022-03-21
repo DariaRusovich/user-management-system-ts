@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { DEPARTMENT_BY_ID_URL, EMPLOYEES_URL } from '../constants/urls';
 import { IDepartment } from '../types/departments';
 
 interface IDepartmentProps {
@@ -25,8 +26,8 @@ const Department: FC<IDepartmentProps> = ({ department }) => {
         <button className="btn btn-danger">Delete</button>
 
         <Link
-          to={'/'}
-          // to={`${DEPARTMENT_BY_ID_URL}${department._id}${EMPLOYEES_URL}`}
+         
+          to={`${DEPARTMENT_BY_ID_URL}${department._id}${EMPLOYEES_URL}`}
         >
           <button className="btn btn-success">Employees</button>
         </Link>

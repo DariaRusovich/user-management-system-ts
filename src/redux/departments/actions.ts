@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { getDepartments } from '../../api/apiServise';
+import { addDepartments, getDepartments } from '../../api/apiServise';
 import { IDepartment, ActionType } from '../../types/departments';
 import { DepartmentsActionTypes } from './actionTypes';
 
@@ -7,7 +7,7 @@ const start = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_START };
 };
 const setDepartments = (departments: IDepartment[]): ActionType => {
-  return { type: DepartmentsActionTypes.SET_DEPARTMENTS, payload: departments };
+  return { type: DepartmentsActionTypes.SET, payload: departments };
 };
 const setError = (error: string): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_ERROR, payload: error };
@@ -24,7 +24,8 @@ export const fetchDepartments = () => {
       const departments = departmentsData.departments.departments;
       dispatch(setDepartments(departments))
     } else {
-        console.log(departmentsDataError);  
+        console.log(departmentsDataError);
+        dispatch(setError(departmentsDataError.error.response.data.message))  
     }
     dispatch(end())
   };
