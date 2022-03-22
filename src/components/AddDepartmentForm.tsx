@@ -7,9 +7,10 @@ import { IDepartment } from '../types/departments';
 const AddDepartmentForm: FC = () => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-//   const { department } = useSelector(departmentsSelector);
-//   const dispatch = useDispatch()
+  const { department } = useSelector(departmentsSelector);
+  const dispatch = useDispatch()
 //   useEffect(() => {
+      
 //     dispatch(fetchNewDepartment())
 //   })
   const createNewDepartment = (event: React.MouseEvent<HTMLFormElement>) => {
@@ -18,8 +19,7 @@ const AddDepartmentForm: FC = () => {
       name: name,
       description: description,
     };
-    console.log(newDepartment);
-    
+    dispatch(fetchNewDepartment(newDepartment)) 
   };
 
   return (

@@ -41,6 +41,7 @@ export const fetchNewDepartment = (department: IDepartment) => {
     if (departmentData) {
       const newDepartment = departmentData.department
       dispatch(addNewDepartment(newDepartment))
+      console.log(newDepartment);
     } else {
       console.log(departmentDataError);
       dispatch(setError(departmentDataError.error.response.data.message))
