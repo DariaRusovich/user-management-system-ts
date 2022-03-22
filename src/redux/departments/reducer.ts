@@ -16,7 +16,7 @@ export const DepartmentsReducer = (state = initialState, action: ActionType): ID
       return { ...state, departments: action.payload };
     }
     case DepartmentsActionTypes.ADD: {
-      return { ...state, department: action.payload };
+      return { ...state, departments: [...state.departments, action.payload] };
     }
     case DepartmentsActionTypes.FETCH_ERROR: {
       return { ...state, error: action.payload };
