@@ -4,6 +4,7 @@ import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
 import AddDepartmentForm from './AddDepartmentForm';
 import Department from './Department';
+import Loader from './Loader';
 
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
@@ -13,20 +14,21 @@ const DepartmentsList: FC = () => {
     dispatch(fetchDepartments());
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <section className="section">
       <div className="container section-wrap">
         <div className="wrapper">
           <button className="btn btn-success">+ Add department</button>
-          <AddDepartmentForm/>
+          <AddDepartmentForm />
           <div className="form-wrap"></div>
         </div>
         <div className="item-list">
           {departments.map((department) => (
-            <Department
-              key={department._id}
-              department={department}
-            />
+            <Department key={department._id} department={department} />
           ))}
         </div>
       </div>

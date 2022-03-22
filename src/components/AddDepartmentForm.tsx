@@ -1,25 +1,19 @@
-import { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { fetchNewDepartment } from '../redux/departments/actions';
-import { departmentsSelector } from '../redux/departments/selectors';
 import { IDepartment } from '../types/departments';
 
 const AddDepartmentForm: FC = () => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const { department } = useSelector(departmentsSelector);
-  const dispatch = useDispatch()
-//   useEffect(() => {
-      
-//     dispatch(fetchNewDepartment())
-//   })
+  const dispatch = useDispatch();
   const createNewDepartment = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newDepartment: IDepartment = {
       name: name,
       description: description,
     };
-    dispatch(fetchNewDepartment(newDepartment)) 
+    dispatch(fetchNewDepartment(newDepartment));
   };
 
   return (

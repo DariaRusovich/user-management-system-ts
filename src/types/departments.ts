@@ -1,5 +1,5 @@
 import { DepartmentsActionTypes } from '../redux/departments/actionTypes';
-import { IErrorResponse } from './types';
+import { IError } from './types';
 
 export interface IDepartment {
   name: string;
@@ -9,12 +9,12 @@ export interface IDepartment {
 }
 export interface IDepartmentData {
   department: IDepartment;
-  error: IErrorResponse
+  response: IError
 }
 export interface IDepartmentsData {
   departments: IDepartments;
   results?: IResults;
-  error: IErrorResponse
+  response: IError
 }
 export interface IDepartments {
   departments: IDepartment[];
