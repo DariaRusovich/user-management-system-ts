@@ -2,7 +2,6 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
-import AddDepartmentForm from './AddDepartmentForm';
 import Department from './Department';
 import Error from './Error';
 import Loader from './Loader';

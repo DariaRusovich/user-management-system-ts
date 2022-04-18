@@ -1,11 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
+import EmployeesList from '../components/EmployeesList';
 
-const EmployeesPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const EmployeesPage: FC = () => {
+  return <EmployeesList />;
 };
 
 export default EmployeesPage;

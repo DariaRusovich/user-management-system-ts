@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import DepartmentsList from '../components/DepartmentsList';
 
-const HomePage = () => {
+const HomePage: FC = () => {
   return <DepartmentsList />;
 };
 

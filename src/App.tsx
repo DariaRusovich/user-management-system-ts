@@ -3,7 +3,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import PrivateRoute from './privateRoutes/PrivateRoute';
 import HomePage from './pages/HomePage';
-import EmployeesList from './components/EmployeesList';
+import NotFoundPage from './pages/NotFoundPage';
+import EmployeesPage from './pages/EmployeesPage';
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
       <Link to="/login">login</Link>
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/departments/:id/employees" element={<EmployeesList />}></Route>
+        <Route
+          path="/departments/:id/employees"
+          element={<EmployeesPage />}
+        ></Route>
         <Route
           path="/"
           element={
@@ -21,6 +25,7 @@ function App() {
             </PrivateRoute>
           }
         ></Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

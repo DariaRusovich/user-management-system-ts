@@ -10,7 +10,6 @@ interface IDepartmentProps {
 const Department: FC<IDepartmentProps> = ({ department }) => {
   const { picture, name, description } = department;
 
-  
   return (
     <div className="department-item item-block">
       <img
@@ -26,11 +25,7 @@ const Department: FC<IDepartmentProps> = ({ department }) => {
       <div className="btns-group">
         <button className="btn btn-primary">Edit</button>
         <button className="btn btn-danger">Delete</button>
-
-        <Link
-         
-          to={`${DEPARTMENTS}/${department._id}${EMPLOYEES_URL}`}
-        >
+        <Link to={`${DEPARTMENTS}/${department._id}${EMPLOYEES_URL}`}>
           <button className="btn btn-success">Employees</button>
         </Link>
       </div>

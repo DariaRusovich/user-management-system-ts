@@ -6,12 +6,12 @@ import { ILoginData } from '../types/types';
 import { Cookie } from '../utils/cookie';
 
 const LoginPage: FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   async function signIn(loginData: ILoginData) {
     const [userDataError, userData] = await signin(loginData);
     if (!userDataError) {
-      const accessToken = userData.user?.tokens.accessToken
-      const refreshToken = userData.user?.tokens.refreshToken
+      const accessToken = userData.user?.tokens.accessToken;
+      const refreshToken = userData.user?.tokens.refreshToken;
       localStorage.setItem('token', accessToken!);
       Cookie.set('refreshToken', refreshToken, 30);
       navigate('/');

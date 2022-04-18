@@ -16,6 +16,7 @@ const LoginForm: FC<ILoginFormProps> = ({signin}) => {
     loginData.password = password;
     signin(loginData)
   }
+  
   return (
     <section className="section">
       <div className="container form-wrap">
