@@ -16,8 +16,6 @@ const DepartmentsList: FC = () => {
   }, []);
 
   if (error) {
-    
-    
     return <Error />
   }
 

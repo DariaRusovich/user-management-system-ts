@@ -25,6 +25,7 @@ const EmployeesList = () => {
   if (loading) {
     return <Loader />;
   }
+  
   return (
     <section className="section">
       <div className="container section-wrap">
