@@ -24,10 +24,11 @@ export const fetchEmployees = (id: string) => {
       if (employeesData) {
           const employees = employeesData.employees
           dispatch(setEmployees(employees))
+          console.log(employees);
+          
       } else {
-          console.log(employeesDataError);      
+          console.dir(employeesDataError);      
       }
       dispatch(end())
   };
 };
-//employeesDataError.response.data.message

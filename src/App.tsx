@@ -1,7 +1,7 @@
 import LoginPage from './pages/LoginPage';
 import { Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
-import PrivateRoute from './hoc/PrivateRoute';
+import PrivateRoute from './privateRoutes/PrivateRoute';
 import HomePage from './pages/HomePage';
 import EmployeesList from './components/EmployeesList';
 

@@ -1,6 +1,5 @@
 import {
-  DEPARTMENT_BY_ID_URL,
-  DEPARTMENTS_URL,
+  DEPARTMENTS,
   LOGIN_URL,
   LOGOUT_URL,
   EMPLOYEES_URL,
@@ -18,21 +17,23 @@ export function getDepartments(
   limit: number = 10,
   page: number = 1
 ): Promise<IDepartmentsData[]> {
-  return api.get(`${DEPARTMENTS_URL}?limit=${limit}&page=${page}`);
+  return api.get(`${DEPARTMENTS}/?limit=${limit}&page=${page}`);
 }
 
 export function addDepartment(
   department: IDepartment
 ): Promise<IDepartmentData[]> {
-  return api.post(`${DEPARTMENTS_URL}`, department);
+  return api.post(`${DEPARTMENTS}/`, department);
 }
 
-export function getDepartment(id: string) {
-  return api.get(`${DEPARTMENTS_URL}/${id}`);
+export function getDepartment(id: string): Promise<IDepartment> {
+  return api.get(`${DEPARTMENTS}/${id}`);
 }
+
 export function getEmployees(id: string): Promise<IEmployees[]> {
-  return api.get(`${EMPLOYEES_URL}/${id}`);
+  return api.get(`${DEPARTMENTS}/${id}${EMPLOYEES_URL}`);
 }
+
 export function signin(loginData: ILoginData): Promise<ILoginData[]> {
   return api.post(LOGIN_URL, loginData);
 }

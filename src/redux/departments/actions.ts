@@ -27,7 +27,6 @@ export const fetchDepartments = () => {
       const departments = departmentsData.departments.departments;
       dispatch(setDepartments(departments));
     } else {
-      console.log(departmentsDataError);
       dispatch(setError(departmentsDataError.response.data.message));
     }
     dispatch(end());
@@ -42,7 +41,6 @@ export const fetchNewDepartment = (department: IDepartment) => {
       const newDepartment = departmentData.department
       dispatch(addNewDepartment(newDepartment))
     } else {
-      alert(departmentDataError.response.data.message);
       dispatch(setError(departmentDataError.response.data.message))
     }
     dispatch(end())

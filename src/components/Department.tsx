@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { DEPARTMENT_BY_ID_URL, EMPLOYEES_URL } from '../constants/urls';
+import { DEPARTMENTS, EMPLOYEES_URL } from '../constants/urls';
 import { IDepartment } from '../types/departments';
 
 interface IDepartmentProps {
@@ -9,6 +9,8 @@ interface IDepartmentProps {
 
 const Department: FC<IDepartmentProps> = ({ department }) => {
   const { picture, name, description } = department;
+
+  
   return (
     <div className="department-item item-block">
       <img
@@ -27,7 +29,7 @@ const Department: FC<IDepartmentProps> = ({ department }) => {
 
         <Link
          
-          to={`${DEPARTMENT_BY_ID_URL}${department._id}${EMPLOYEES_URL}`}
+          to={`${DEPARTMENTS}/${department._id}${EMPLOYEES_URL}`}
         >
           <button className="btn btn-success">Employees</button>
         </Link>

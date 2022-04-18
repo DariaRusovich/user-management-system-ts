@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import '../styles/Loader.css'
+import '../styles/Loader.scss'
 
 const Loader:FC = () => {
     return (
