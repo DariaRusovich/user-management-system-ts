@@ -13,8 +13,6 @@ export interface IToken {
 export interface IError {
   data: IErrorMessage
 }
-//response.data.message
-
 export interface IErrorMessage {
   message: string
 }

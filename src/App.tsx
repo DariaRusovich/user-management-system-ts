@@ -10,8 +10,6 @@ function App() {
     <div className="App">
       <Header />
       <Link to="/login">login</Link>
-      <Link to="/departments/:id/employees">employees</Link>
-      <Link to="/">home</Link>
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/departments/:id/employees" element={<EmployeesList />}></Route>

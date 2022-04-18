@@ -7,7 +7,6 @@ interface IEmployeeProps {
 
 const Employee: FC<IEmployeeProps> = ({ employee }) => {
   const { username, email, firstName, lastName } = employee
-  console.log(employee._id);
   
   return (
     <div className="employee-item item-block">

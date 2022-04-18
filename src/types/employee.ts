@@ -1,4 +1,5 @@
-import { EmployeesActionTypes } from "../redux/employees/actionTypes";
+import { EmployeesActionTypes } from '../redux/employees/actionTypes';
+import { IError } from './types';
 
 export interface IEmployee {
   username: string;
@@ -10,7 +11,8 @@ export interface IEmployee {
   picture?: string;
 }
 export interface IEmployees {
-  employees: IEmployee[]
+  employees: IEmployee[];
+  response: IError;
 }
 export interface IEmployeesState {
   employees: IEmployee[];
@@ -31,8 +33,4 @@ interface IFetchError {
 interface IFetchEnd {
   type: EmployeesActionTypes.FETCH_END;
 }
-export type ActionType =
-  | IFetchStart
-  | ISetEmployees
-  | IFetchError
-  | IFetchEnd;
+export type ActionType = IFetchStart | ISetEmployees | IFetchError | IFetchEnd;

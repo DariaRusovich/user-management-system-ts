@@ -5,17 +5,26 @@ import { Link } from 'react-router-dom';
 import { fetchEmployees } from '../redux/employees/actions';
 import { employeesSelector } from '../redux/employees/selectors';
 import Employee from './Employee';
+import Error from './Error';
+import Loader from './Loader';
 
 const EmployeesList = () => {
   const { employees, error, loading } = useSelector(employeesSelector);
   const { id } = useParams() as any;
   //const { id } = useParams<{id?: string}>();
- 
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEmployees(id));
   }, []);
 
+  if (error) {
+    return <Error />;
+  }
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <section className="section">
       <div className="container section-wrap">

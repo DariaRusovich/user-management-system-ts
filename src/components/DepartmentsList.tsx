@@ -4,6 +4,7 @@ import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
 import AddDepartmentForm from './AddDepartmentForm';
 import Department from './Department';
+import Error from './Error';
 import Loader from './Loader';
 
 const DepartmentsList: FC = () => {
@@ -13,6 +14,12 @@ const DepartmentsList: FC = () => {
   useEffect(() => {
     dispatch(fetchDepartments());
   }, []);
+
+  if (error) {
+    
+    
+    return <Error />
+  }
 
   if (loading) {
     return <Loader />;

@@ -31,7 +31,7 @@ export function getDepartment(id: string): Promise<IDepartment> {
 }
 
 export function getEmployees(id: string): Promise<IEmployees[]> {
-  return api.get(`${DEPARTMENTS}/${id}${EMPLOYEES_URL}`);
+  return api.get(`${DEPARTMENTS}/${id}/${EMPLOYEES_URL}`);
 }
 
 export function signin(loginData: ILoginData): Promise<ILoginData[]> {

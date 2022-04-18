@@ -23,11 +23,10 @@ export const fetchEmployees = (id: string) => {
       const [employeesDataError, employeesData] = await getEmployees(id)
       if (employeesData) {
           const employees = employeesData.employees
-          dispatch(setEmployees(employees))
-          console.log(employees);
-          
+          dispatch(setEmployees(employees)) 
       } else {
-          console.dir(employeesDataError);      
+          dispatch(setError(employeesDataError.response?.data.message))
+          
       }
       dispatch(end())
   };
