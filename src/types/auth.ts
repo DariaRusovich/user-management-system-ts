@@ -3,7 +3,7 @@ import { AuthActionTypes } from '../redux/auth/actionTypes';
 export interface LoginData {
   username?: string;
   password?: string;
-  loginTokens?: TokensData[];
+  loginTokens?: TokensData | null;
   loading: boolean;
   error: null | string;
 }
@@ -11,15 +11,15 @@ export interface TokensData {
   user: Tokens;
 }
 export interface Tokens {
-  accessToken: string;
-  refreshToken: string;
+  accessToken: null | string;
+  refreshToken: null | string;
 }
 interface FETCH_START {
   type: AuthActionTypes.FETCH_START;
 }
 interface SET_TOKENS {
   type: AuthActionTypes.SET;
-  payload: TokensData[];
+  payload: TokensData;
 }
 interface FETCH_END {
   type: AuthActionTypes.FETCH_END;

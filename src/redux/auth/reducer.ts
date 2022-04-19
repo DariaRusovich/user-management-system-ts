@@ -1,12 +1,13 @@
 import { LoginData, ActionType } from '../../types/auth';
 import { AuthActionTypes } from './actionTypes';
+import { TokensData } from "../../types/auth";
+
 
 const InitialState: LoginData = {
-  loginTokens: [],
+  loginTokens: null,
   loading: false,
   error: null,
 };
-
 
 export const AuthReducer = (
   state = InitialState,

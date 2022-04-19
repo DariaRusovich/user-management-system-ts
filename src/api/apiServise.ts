@@ -10,7 +10,7 @@ import {
   IDepartmentsData,
 } from '../types/departments';
 import { IEmployees } from '../types/employee';
-import { ILoginData } from '../types/types';
+import { LoginData } from '../types/auth';
 import { api } from './interceptors';
 
 export function getDepartments(
@@ -34,6 +34,6 @@ export function getEmployees(id: string): Promise<IEmployees[]> {
   return api.get(`${DEPARTMENTS}/${id}${EMPLOYEES_URL}`);
 }
 
-export function signin(loginData: ILoginData): Promise<ILoginData[]> {
+export function signin(loginData: LoginData): Promise<LoginData[]> {
   return api.post(LOGIN_URL, loginData);
 }
