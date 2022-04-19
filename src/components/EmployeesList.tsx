@@ -10,13 +10,13 @@ import Loader from './Loader';
 
 const EmployeesList = () => {
   const { employees, error, loading } = useSelector(employeesSelector);
-  const { id } = useParams() as any;
+  const { id } = useParams() as { id: string };
   //const { id } = useParams<{id?: string}>();
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEmployees(id));
-  }, []);
+  }, [id]);
 
   if (error) {
     return <Error />;
@@ -25,7 +25,7 @@ const EmployeesList = () => {
   if (loading) {
     return <Loader />;
   }
-  
+
   return (
     <section className="section">
       <div className="container section-wrap">
