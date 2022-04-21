@@ -1,10 +1,10 @@
-import { LoginData, ActionType } from '../../types/auth';
+import { LoginData, ActionType, AuthState } from '../../types/auth';
 import { AuthActionTypes } from './actionTypes';
 import { TokensData } from "../../types/auth";
 
 
-const InitialState: LoginData = {
-  loginTokens: null,
+const InitialState: AuthState = {
+  tokens: null,
   loading: false,
   error: null,
 };
@@ -12,13 +12,13 @@ const InitialState: LoginData = {
 export const AuthReducer = (
   state = InitialState,
   action: ActionType
-): LoginData => {
+): AuthState => {
   switch (action.type) {
     case AuthActionTypes.FETCH_START: {
       return { ...state, loading: true };
     }
     case AuthActionTypes.SET: {
-      return { ...state, loginTokens: action.payload };
+      return { ...state, tokens: action.payload };
     }
     case AuthActionTypes.FETCH_END: {
       return { ...state, loading: false };

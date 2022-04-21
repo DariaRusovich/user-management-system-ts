@@ -1,22 +1,31 @@
 import React, { FC, useState } from 'react';
-import { ILoginData } from '../types/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchTokens } from '../redux/auth/actions';
+import { authSelector } from '../redux/auth/selectors';
+import { LoginData } from '../types/auth';
 
-interface ILoginFormProps{
-    signin: (loginData: ILoginData) => Promise<void>
+
+interface ILoginFormProps {
+  signin?: (loginData: LoginData) => Promise<void>;
 }
 
-const LoginForm: FC<ILoginFormProps> = ({signin}) => {
+const LoginForm: FC<ILoginFormProps> = ({ signin }) => {
+  const { error, loading, tokens } = useSelector(authSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   function handleSubmit(event: React.MouseEvent<HTMLFormElement>) {
     event.preventDefault();
-    const loginData: ILoginData = {};
+    const loginData: LoginData = {};
     loginData.username = name;
     loginData.password = password;
-    signin(loginData)
+    dispatch(fetchTokens(loginData));
+    navigate('/');
   }
-  
+
   return (
     <section className="section">
       <div className="container form-wrap">

@@ -3,17 +3,45 @@ import { AuthActionTypes } from '../redux/auth/actionTypes';
 export interface LoginData {
   username?: string;
   password?: string;
-  loginTokens?: TokensData | null;
-  loading: boolean;
-  error: null | string;
+  user?: TokensData;
 }
+
 export interface TokensData {
-  user: Tokens;
+  tokens: Tokens;
 }
+
 export interface Tokens {
   accessToken: null | string;
   refreshToken: null | string;
 }
+
+export interface AuthState {
+  loading: boolean;
+  error: null | string;
+  tokens: any;
+}
+
+// export interface LoginData {
+//   username?: string;
+//   password?: string;
+//   tokens?: Tokens;
+//   loading?: boolean;
+//   error?: null | string;
+// }
+// export interface TokensData extends LoginData {
+//   user?: TokensData | null;
+// }
+// export interface AuthState {
+//   tokens?: Tokens;
+//   user?: TokensData | null;
+//   loading: boolean;
+//   error: null | string;
+// }
+// export interface Tokens {
+//   accessToken: null | string;
+//   refreshToken: null | string;
+// }
+
 interface FETCH_START {
   type: AuthActionTypes.FETCH_START;
 }
