@@ -1,13 +1,13 @@
-import { ActionType, IEmployeesState } from "../../types/employee";
+import { ActionType, EmployeesState } from "../../types/employee";
 import { EmployeesActionTypes } from "./actionTypes";
 
-const initialState: IEmployeesState = {
+const initialState: EmployeesState = {
     employees: [],
     loading: false,
     error: null,
 }
 
-export const EmployeesReducer = (state = initialState, action: ActionType):IEmployeesState => {
+export const EmployeesReducer = (state = initialState, action: ActionType):EmployeesState => {
     switch (action.type) {
         case EmployeesActionTypes.FETCH_START: {
           return { ...state, loading: true };

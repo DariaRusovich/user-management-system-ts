@@ -5,32 +5,32 @@ import {
   EMPLOYEES_URL,
 } from '../constants/urls';
 import {
-  IDepartmentData,
-  IDepartment,
-  IDepartmentsData,
+  DepartmentData,
+  Department,
+  DepartmentsData,
 } from '../types/departments';
-import { IEmployees } from '../types/employee';
+import { Employees } from '../types/employee';
 import { LoginData } from '../types/auth';
 import { api } from './interceptors';
 
 export function getDepartments(
   limit: number = 10,
   page: number = 1
-): Promise<IDepartmentsData[]> {
+): Promise<DepartmentsData[]> {
   return api.get(`${DEPARTMENTS}/?limit=${limit}&page=${page}`);
 }
 
 export function addDepartment(
-  department: IDepartment
-): Promise<IDepartmentData[]> {
+  department: Department
+): Promise<DepartmentData[]> {
   return api.post(`${DEPARTMENTS}/`, department);
 }
 
-export function getDepartment(id: string): Promise<IDepartment> {
+export function getDepartment(id: string): Promise<Department> {
   return api.get(`${DEPARTMENTS}/${id}`);
 }
 
-export function getEmployees(id: string): Promise<IEmployees[]> {
+export function getEmployees(id: string): Promise<Employees[]> {
   return api.get(`${DEPARTMENTS}/${id}${EMPLOYEES_URL}`);
 }
 

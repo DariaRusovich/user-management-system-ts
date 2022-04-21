@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { IEmployee } from '../types/employee';
+import { Employee } from '../types/employee';
 
-interface IEmployeeProps {
-  employee: IEmployee;
+interface EmployeeProps {
+  employee: Employee;
 }
 
-const Employee: FC<IEmployeeProps> = ({ employee }) => {
+const Employee: FC<EmployeeProps> = ({ employee }) => {
   const { username, email, firstName, lastName } = employee
   
   return (

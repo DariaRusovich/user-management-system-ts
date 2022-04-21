@@ -11,7 +11,6 @@ import Loader from './Loader';
 const EmployeesList = () => {
   const { employees, error, loading } = useSelector(employeesSelector);
   const { id } = useParams() as { id: string };
-  //const { id } = useParams<{id?: string}>();
 
   const dispatch = useDispatch();
   useEffect(() => {

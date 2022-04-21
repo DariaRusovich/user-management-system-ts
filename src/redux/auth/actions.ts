@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { signin } from '../../api/apiServise';
-import { TokensData, ActionType } from '../../types/auth';
+import { TokensData, ActionType, AuthState } from '../../types/auth';
 import { LoginData } from '../../types/auth';
 import { Cookie } from '../../utils/cookie';
 import { AuthActionTypes } from './actionTypes';
@@ -26,10 +26,6 @@ export const fetchTokens = (loginData: LoginData) => {
         if (!tokensDataError) {
             const accessToken = tokensData.user?.tokens.accessToken
             const refreshToken = tokensData.user?.tokens.accessToken
-            console.log('tokensData', tokensData);
-            
-            console.log('accessToken', accessToken);
-            console.log('refreshToken', refreshToken);
             localStorage.setItem('token', accessToken!);
             Cookie.set('refreshToken', refreshToken, 30);
             //dispatch(setTokens(tokensData))

@@ -1,18 +1,7 @@
-export interface ILoginData {
-  username?: string;
-  password?: string;
-  user?: IUser;
+export interface Error {
+  data: ErrorMessage
 }
-export interface IUser {
-  tokens: IToken;
-}
-export interface IToken {
-  accessToken: string;
-  refreshToken: string;
-}
-export interface IError {
-  data: IErrorMessage
-}
-export interface IErrorMessage {
+export interface ErrorMessage {
   message: string
 }
+

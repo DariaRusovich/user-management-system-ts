@@ -1,13 +1,13 @@
 import { DepartmentsActionTypes } from './actionTypes';
-import { IDepatmentsState, ActionType } from '../../types/departments';
+import { DepatmentsState, ActionType } from '../../types/departments';
 
-const initialState: IDepatmentsState = {
+const initialState: DepatmentsState = {
   departments: [],
   loading: false,
   error: null,
 };
 
-export const DepartmentsReducer = (state = initialState, action: ActionType): IDepatmentsState => {
+export const DepartmentsReducer = (state = initialState, action: ActionType): DepatmentsState => {
   switch (action.type) {
     case DepartmentsActionTypes.FETCH_START: {
       return { ...state, loading: true };

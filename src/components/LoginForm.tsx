@@ -5,12 +5,7 @@ import { fetchTokens } from '../redux/auth/actions';
 import { authSelector } from '../redux/auth/selectors';
 import { LoginData } from '../types/auth';
 
-
-interface ILoginFormProps {
-  signin?: (loginData: LoginData) => Promise<void>;
-}
-
-const LoginForm: FC<ILoginFormProps> = ({ signin }) => {
+const LoginForm: FC = () => {
   const { error, loading, tokens } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();

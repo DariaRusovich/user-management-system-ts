@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchNewDepartment } from '../redux/departments/actions';
-import { IDepartment } from '../types/departments';
+import { Department } from '../types/departments';
 
 const AddDepartmentForm: FC = () => {
   const [name, setName] = useState<string>('');
@@ -9,7 +9,7 @@ const AddDepartmentForm: FC = () => {
   const dispatch = useDispatch();
   const createNewDepartment = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newDepartment: IDepartment = {
+    const newDepartment: Department = {
       name: name,
       description: description,
     };

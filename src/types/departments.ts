@@ -1,57 +1,57 @@
 import { DepartmentsActionTypes } from '../redux/departments/actionTypes';
-import { IError } from './types';
+import { Error } from './types';
 
-export interface IDepartment {
+export interface Department {
   name: string;
   description: string;
   _id?: string;
   picture?: string;
 }
-export interface IDepartmentData {
-  department: IDepartment;
-  response: IError
+export interface DepartmentData {
+  department: Department;
+  response: Error
 }
-export interface IDepartmentsData {
-  departments: IDepartments;
-  results?: IResults;
-  response: IError
+export interface DepartmentsData {
+  departments: Departments;
+  results?: Results;
+  response: Error
 }
-export interface IDepartments {
-  departments: IDepartment[];
+export interface Departments {
+  departments: Department[];
 }
-export interface IResults {
+export interface Results {
   currentPage: number;
   limit: number;
   sortBy: string;
   total: number;
 }
-export interface IDepatmentsState {
-  departments: IDepartment[];
-  department?: IDepartment;
+export interface DepatmentsState {
+  departments: Department[];
+  department?: Department;
   loading: boolean;
   error: null | string;
 }
-interface IFetchStart {
+interface FetchStart {
   type: DepartmentsActionTypes.FETCH_START;
 }
-interface ISetDepartments {
+interface SetDepartments {
   type: DepartmentsActionTypes.SET;
-  payload: IDepartment[];
+  payload: Department[];
 }
-interface IAddDepartment {
+interface AddDepartment {
   type: DepartmentsActionTypes.ADD;
-  payload: IDepartment;
+  payload: Department;
 }
-interface IFetchError {
+interface FetchError {
   type: DepartmentsActionTypes.FETCH_ERROR;
   payload: string;
 }
-interface IFetchEnd {
+interface FetchEnd {
   type: DepartmentsActionTypes.FETCH_END;
 }
 export type ActionType =
-  | IFetchStart
-  | ISetDepartments
-  | IFetchError
-  | IFetchEnd
-  | IAddDepartment
+  | FetchStart
+  | SetDepartments
+  | FetchError
+  | FetchEnd
+  | AddDepartment

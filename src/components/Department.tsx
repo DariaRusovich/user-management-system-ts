@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { DEPARTMENTS, EMPLOYEES_URL } from '../constants/urls';
-import { IDepartment } from '../types/departments';
+import { Department } from '../types/departments';
 
-interface IDepartmentProps {
-  department: IDepartment;
+interface DepartmentProps {
+  department: Department;
 }
 
-const Department: FC<IDepartmentProps> = ({ department }) => {
+const Department: FC<DepartmentProps> = ({ department }) => {
   const { picture, name, description } = department;
 
   return (

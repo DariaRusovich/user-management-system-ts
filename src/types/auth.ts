@@ -21,27 +21,6 @@ export interface AuthState {
   tokens: any;
 }
 
-// export interface LoginData {
-//   username?: string;
-//   password?: string;
-//   tokens?: Tokens;
-//   loading?: boolean;
-//   error?: null | string;
-// }
-// export interface TokensData extends LoginData {
-//   user?: TokensData | null;
-// }
-// export interface AuthState {
-//   tokens?: Tokens;
-//   user?: TokensData | null;
-//   loading: boolean;
-//   error: null | string;
-// }
-// export interface Tokens {
-//   accessToken: null | string;
-//   refreshToken: null | string;
-// }
-
 interface FETCH_START {
   type: AuthActionTypes.FETCH_START;
 }
