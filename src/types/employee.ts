@@ -1,7 +1,7 @@
 import { EmployeesActionTypes } from '../redux/employees/actionTypes';
 import { Error } from './types';
 
-export interface Employee {
+export interface EmployeeData {
   username: string;
   email: string;
   firstName: string;
@@ -11,11 +11,11 @@ export interface Employee {
   picture?: string;
 }
 export interface Employees {
-  employees: Employee[];
+  employees: EmployeeData[];
   response: Error;
 }
 export interface EmployeesState {
-  employees: Employee[];
+  employees: EmployeeData[];
   loading: boolean;
   error: null | string;
 }
@@ -24,7 +24,7 @@ interface FetchStart {
 }
 interface SetEmployees {
   type: EmployeesActionTypes.SET_EMPLOYEES;
-  payload: Employee[];
+  payload: EmployeeData[];
 }
 interface FetchError {
   type: EmployeesActionTypes.FETCH_ERROR;

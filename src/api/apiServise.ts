@@ -6,7 +6,7 @@ import {
 } from '../constants/urls';
 import {
   DepartmentData,
-  Department,
+  IDepartment,
   DepartmentsData,
 } from '../types/departments';
 import { Employees } from '../types/employee';
@@ -21,12 +21,12 @@ export function getDepartments(
 }
 
 export function addDepartment(
-  department: Department
+  department: IDepartment
 ): Promise<DepartmentData[]> {
   return api.post(`${DEPARTMENTS}/`, department);
 }
 
-export function getDepartment(id: string): Promise<Department> {
+export function getDepartment(id: string): Promise<IDepartment> {
   return api.get(`${DEPARTMENTS}/${id}`);
 }
 

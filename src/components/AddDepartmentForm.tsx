@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchNewDepartment } from '../redux/departments/actions';
-import { Department } from '../types/departments';
+import { IDepartment } from '../types/departments';
 
 const AddDepartmentForm: FC = () => {
   const [name, setName] = useState<string>('');
@@ -9,7 +9,7 @@ const AddDepartmentForm: FC = () => {
   const dispatch = useDispatch();
   const createNewDepartment = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newDepartment: Department = {
+    const newDepartment: IDepartment = {
       name: name,
       description: description,
     };
@@ -24,7 +24,7 @@ const AddDepartmentForm: FC = () => {
           <input
             type="text"
             name="name"
-            placeholder="Department name"
+            placeholder="IDepartment name"
             onChange={(e) => setName(e.target.value)}
             required
           />
@@ -33,7 +33,7 @@ const AddDepartmentForm: FC = () => {
         <div className="input-wrapper">
           <textarea
             name="description"
-            placeholder="Department description"
+            placeholder="IDepartment description"
             onChange={(e) => setDescription(e.target.value)}
             required
           ></textarea>

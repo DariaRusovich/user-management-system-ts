@@ -1,12 +1,12 @@
 import { Dispatch } from 'redux';
 import { getEmployees } from '../../api/apiServise';
-import { ActionType, Employee } from '../../types/employee';
+import { ActionType, EmployeeData } from '../../types/employee';
 import { EmployeesActionTypes } from './actionTypes';
 
 const start = (): ActionType => {
   return { type: EmployeesActionTypes.FETCH_START };
 };
-const setEmployees = (employees: Employee[]): ActionType => {
+const setEmployees = (employees: EmployeeData[]): ActionType => {
   return { type: EmployeesActionTypes.SET_EMPLOYEES, payload: employees };
 };
 const setError = (error: string): ActionType => {

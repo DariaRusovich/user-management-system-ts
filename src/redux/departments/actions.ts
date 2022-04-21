@@ -1,15 +1,15 @@
 import { Dispatch } from 'redux';
 import { getDepartments, addDepartment } from '../../api/apiServise';
-import { Department, ActionType } from '../../types/departments';
+import { IDepartment, ActionType } from '../../types/departments';
 import { DepartmentsActionTypes } from './actionTypes';
 
 const start = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_START };
 };
-const setDepartments = (departments: Department[]): ActionType => {
+const setDepartments = (departments: IDepartment[]): ActionType => {
   return { type: DepartmentsActionTypes.SET, payload: departments };
 };
-const addNewDepartment = (department: Department): ActionType => {
+const addNewDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.ADD, payload: department };
 };
 const setError = (error: string): ActionType => {
@@ -33,7 +33,7 @@ export const fetchDepartments = () => {
   };
 };
 
-export const fetchNewDepartment = (department: Department) => {
+export const fetchNewDepartment = (department: IDepartment) => {
   return async (dispatch: Dispatch<ActionType>) => {
     dispatch(start());
     const [departmentDataError, departmentData] = await addDepartment(department)

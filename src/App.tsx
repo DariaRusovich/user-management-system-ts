@@ -2,9 +2,9 @@ import LoginPage from './pages/LoginPage';
 import { Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import PrivateRoute from './privateRoutes/PrivateRoute';
-import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import EmployeesPage from './pages/EmployeesPage';
+import DepartmentsList from './components/DepartmentsList';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <DepartmentsList />
             </PrivateRoute>
           }
         ></Route>

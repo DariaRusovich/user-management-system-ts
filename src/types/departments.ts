@@ -1,14 +1,14 @@
 import { DepartmentsActionTypes } from '../redux/departments/actionTypes';
 import { Error } from './types';
 
-export interface Department {
+export interface IDepartment {
   name: string;
   description: string;
   _id?: string;
   picture?: string;
 }
 export interface DepartmentData {
-  department: Department;
+  department: IDepartment;
   response: Error
 }
 export interface DepartmentsData {
@@ -17,7 +17,7 @@ export interface DepartmentsData {
   response: Error
 }
 export interface Departments {
-  departments: Department[];
+  departments: IDepartment[];
 }
 export interface Results {
   currentPage: number;
@@ -26,8 +26,8 @@ export interface Results {
   total: number;
 }
 export interface DepatmentsState {
-  departments: Department[];
-  department?: Department;
+  departments: IDepartment[];
+  department?: IDepartment;
   loading: boolean;
   error: null | string;
 }
@@ -36,11 +36,11 @@ interface FetchStart {
 }
 interface SetDepartments {
   type: DepartmentsActionTypes.SET;
-  payload: Department[];
+  payload: IDepartment[];
 }
 interface AddDepartment {
   type: DepartmentsActionTypes.ADD;
-  payload: Department;
+  payload: IDepartment;
 }
 interface FetchError {
   type: DepartmentsActionTypes.FETCH_ERROR;

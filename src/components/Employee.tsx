@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Employee } from '../types/employee';
+import { EmployeeData } from '../types/employee';
 
 interface EmployeeProps {
-  employee: Employee;
+  employee: EmployeeData;
 }
 
 const Employee: FC<EmployeeProps> = ({ employee }) => {
