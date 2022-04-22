@@ -1,7 +1,5 @@
-import { LoginData, ActionType, AuthState } from '../../types/auth';
+import { ActionType, AuthState } from '../../types/auth';
 import { AuthActionTypes } from './actionTypes';
-import { TokensData } from "../../types/auth";
-
 
 const InitialState: AuthState = {
   tokens: null,

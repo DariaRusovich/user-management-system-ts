@@ -1,15 +1,14 @@
 import { Dispatch } from 'redux';
 import { signin } from '../../api/apiServise';
-import { TokensData, ActionType, AuthState } from '../../types/auth';
+import { ActionType } from '../../types/auth';
 import { LoginData } from '../../types/auth';
 import { Cookie } from '../../utils/cookie';
 import { AuthActionTypes } from './actionTypes';
 
-
 const start = (): ActionType => {
   return { type: AuthActionTypes.FETCH_START };
 };
-const setTokens = (tokens: TokensData): ActionType => {
+const setTokens = (tokens: LoginData): ActionType => {
   return { type: AuthActionTypes.SET, payload: tokens };
 };
 const setError = (error: string): ActionType => {
@@ -28,9 +27,9 @@ export const fetchTokens = (loginData: LoginData) => {
             const refreshToken = tokensData.user?.tokens.accessToken
             localStorage.setItem('token', accessToken!);
             Cookie.set('refreshToken', refreshToken, 30);
-            //dispatch(setTokens(tokensData))
+            dispatch(setTokens(tokensData))
         } else {
-            //dispatch(setTokens(tokensDataError))
+            dispatch(setError(tokensDataError.response!.data.message))
         }
         dispatch(end())
     }

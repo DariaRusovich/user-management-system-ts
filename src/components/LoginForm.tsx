@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
 import { authSelector } from '../redux/auth/selectors';
 import { LoginData } from '../types/auth';
+import Error from './Error';
+import Loader from './Loader';
 
 const LoginForm: FC = () => {
-  const { error, loading, tokens } = useSelector(authSelector);
+  const { error, loading } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [name, setName] = useState<string>('');
@@ -20,7 +22,12 @@ const LoginForm: FC = () => {
     dispatch(fetchTokens(loginData));
     navigate('/');
   }
-
+  if (loading) {
+    return <Loader />
+  }
+  if (error) {
+    return <Error/>
+  }
   return (
     <section className="section">
       <div className="container form-wrap">
