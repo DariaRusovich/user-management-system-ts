@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { signin } from '../../api/apiServise';
-import { ActionType } from '../../types/auth';
+import { ActionType, UserData } from '../../types/auth';
 import { LoginData } from '../../types/auth';
 import { Cookie } from '../../utils/cookie';
 import { AuthActionTypes } from './actionTypes';
@@ -8,7 +8,7 @@ import { AuthActionTypes } from './actionTypes';
 const start = (): ActionType => {
   return { type: AuthActionTypes.FETCH_START };
 };
-const setTokens = (tokens: LoginData): ActionType => {
+const setTokens = (tokens: UserData): ActionType => {
   return { type: AuthActionTypes.SET, payload: tokens };
 };
 const setError = (error: string): ActionType => {
