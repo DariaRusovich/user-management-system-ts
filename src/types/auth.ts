@@ -10,6 +10,9 @@ export interface UserData {
   tokens?: Tokens;
   response?: Error;  
 }
+export interface TokensResponseData {
+  user: UserData;
+}
 export interface TokensData {
   tokens: Tokens;
 }
@@ -27,7 +30,7 @@ interface FETCH_START {
 }
 interface SET_TOKENS {
   type: AuthActionTypes.SET;
-  payload: UserData;
+  payload: TokensResponseData;
 }
 interface FETCH_END {
   type: AuthActionTypes.FETCH_END;
