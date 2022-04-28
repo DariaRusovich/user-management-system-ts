@@ -35,11 +35,11 @@ interface FetchStart {
   type: DepartmentsActionTypes.FETCH_START;
 }
 interface SetDepartments {
-  type: DepartmentsActionTypes.SET;
+  type: DepartmentsActionTypes.SET_DEPARTMENTS;
   payload: IDepartment[];
 }
 interface AddDepartment {
-  type: DepartmentsActionTypes.ADD;
+  type: DepartmentsActionTypes.ADD_DEPARTMENT;
   payload: IDepartment;
 }
 interface FetchError {

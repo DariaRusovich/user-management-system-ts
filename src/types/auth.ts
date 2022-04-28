@@ -36,7 +36,7 @@ interface FETCH_START {
   type: AuthActionTypes.FETCH_START;
 }
 interface SET_TOKENS {
-  type: AuthActionTypes.SET;
+  type: AuthActionTypes.SET_TOKENS;
   payload: TokensResponseData;
 }
 interface FETCH_END {

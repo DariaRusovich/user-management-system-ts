@@ -9,7 +9,7 @@ const start = (): ActionType => {
   return { type: AuthActionTypes.FETCH_START };
 };
 const setTokens = (tokens: TokensResponseData): ActionType => {
-  return { type: AuthActionTypes.SET, payload: tokens };
+  return { type: AuthActionTypes.SET_TOKENS, payload: tokens };
 };
 const setError = (error: string): ActionType => {
   return { type: AuthActionTypes.FETCH_ERROR, payload: error };

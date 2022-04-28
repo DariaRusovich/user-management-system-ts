@@ -7,10 +7,10 @@ const start = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_START };
 };
 const setDepartments = (departments: IDepartment[]): ActionType => {
-  return { type: DepartmentsActionTypes.SET, payload: departments };
+  return { type: DepartmentsActionTypes.SET_DEPARTMENTS, payload: departments };
 };
 const addNewDepartment = (department: IDepartment): ActionType => {
-  return { type: DepartmentsActionTypes.ADD, payload: department };
+  return { type: DepartmentsActionTypes.ADD_DEPARTMENT, payload: department };
 };
 const setError = (error: string): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_ERROR, payload: error };

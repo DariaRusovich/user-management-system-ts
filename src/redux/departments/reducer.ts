@@ -12,10 +12,10 @@ export const DepartmentsReducer = (state = initialState, action: ActionType): De
     case DepartmentsActionTypes.FETCH_START: {
       return { ...state, loading: true };
     }
-    case DepartmentsActionTypes.SET: {
+    case DepartmentsActionTypes.SET_DEPARTMENTS: {
       return { ...state, departments: action.payload };
     }
-    case DepartmentsActionTypes.ADD: {
+    case DepartmentsActionTypes.ADD_DEPARTMENT: {
       return { ...state, departments: [...state.departments, action.payload] };
     }
     case DepartmentsActionTypes.FETCH_ERROR: {

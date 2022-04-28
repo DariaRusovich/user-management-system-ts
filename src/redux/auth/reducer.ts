@@ -15,7 +15,7 @@ export const AuthReducer = (
     case AuthActionTypes.FETCH_START: {
       return { ...state, loading: true };
     }
-    case AuthActionTypes.SET: {
+    case AuthActionTypes.SET_TOKENS: {
       return { ...state, tokens: action.payload };
     }
     case AuthActionTypes.FETCH_END: {
