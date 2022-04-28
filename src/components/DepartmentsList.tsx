@@ -8,6 +8,8 @@ import Loader from './Loader';
 
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
+  console.log(departments);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

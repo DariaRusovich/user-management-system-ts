@@ -8,7 +8,7 @@ import Error from './Error';
 import Loader from './Loader';
 
 const LoginForm: FC = () => {
-  const { error, loading } = useSelector(authSelector);
+  const { tokens, error, loading } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [name, setName] = useState<string>('');
@@ -23,10 +23,10 @@ const LoginForm: FC = () => {
     navigate('/');
   }
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
   if (error) {
-    return <Error/>
+    return <Error />;
   }
   return (
     <section className="section">

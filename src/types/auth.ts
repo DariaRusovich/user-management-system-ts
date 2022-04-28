@@ -5,10 +5,17 @@ export interface LoginData {
   username?: string;
   password?: string;
 }
+export interface TokensResponseData{
+  user: UserData
+}
 export interface UserData {
-  user?: TokensData;
-  tokens?: Tokens;
-  response?: Error;  
+  tokens: Tokens;
+  user: User;
+  response?: Error;
+}
+export interface User {
+  id: string;
+  role: string;
 }
 export interface TokensResponseData {
   user: UserData;
@@ -23,7 +30,7 @@ export interface Tokens {
 export interface AuthState {
   loading: boolean;
   error: null | string;
-  tokens: UserData | null;
+  tokens: TokensResponseData | null;
 }
 interface FETCH_START {
   type: AuthActionTypes.FETCH_START;
