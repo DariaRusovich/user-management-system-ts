@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { signin } from '../../api/apiServise';
-import { ActionType, TokensResponseData, UserData } from '../../types/auth';
+import { ActionType, TokensResponseData } from '../../types/auth';
 import { LoginData } from '../../types/auth';
 import { Cookie } from '../../utils/cookie';
 import { AuthActionTypes } from './actionTypes';
@@ -29,7 +29,7 @@ export const fetchTokens = (loginData: LoginData) => {
       Cookie.set('refreshToken', refreshToken, 30);
       dispatch(setTokens(tokensData))
     } else {
-      //dispatch(setError(tokensDataError))
+      dispatch(setError(tokensDataError.response?.data.message!))
     }
     dispatch(end());
   };

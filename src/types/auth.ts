@@ -7,11 +7,11 @@ export interface LoginData {
 }
 export interface TokensResponseData{
   user: UserData
+  response?: Error;
 }
 export interface UserData {
   tokens: Tokens;
   user: User;
-  response?: Error;
 }
 export interface User {
   id: string;
