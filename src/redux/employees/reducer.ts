@@ -9,16 +9,16 @@ const initialState: EmployeesState = {
 
 export const EmployeesReducer = (state = initialState, action: ActionType):EmployeesState => {
     switch (action.type) {
-        case EmployeesActionTypes.FETCH_START: {
+        case EmployeesActionTypes.FETCH_EMPLOYEES_START: {
           return { ...state, loading: true };
         }
         case EmployeesActionTypes.SET_EMPLOYEES: {
           return { ...state, employees: action.payload };
         }
-        case EmployeesActionTypes.FETCH_ERROR: {
+        case EmployeesActionTypes.FETCH_EMPLOYEES_ERROR: {
           return { ...state, error: action.payload };
         }
-        case EmployeesActionTypes.FETCH_END: {
+        case EmployeesActionTypes.FETCH_EMPLOYEES_END: {
           return { ...state, loading: false };
         }
         default:

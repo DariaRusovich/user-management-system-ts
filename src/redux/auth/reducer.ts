@@ -12,16 +12,16 @@ export const AuthReducer = (
   action: ActionType
 ): AuthState => {
   switch (action.type) {
-    case AuthActionTypes.FETCH_START: {
+    case AuthActionTypes.FETCH_TOKENS_START: {
       return { ...state, loading: true };
     }
     case AuthActionTypes.SET_TOKENS: {
       return { ...state, tokens: action.payload };
     }
-    case AuthActionTypes.FETCH_END: {
+    case AuthActionTypes.FETCH_TOKENS_END: {
       return { ...state, loading: false };
     }
-    case AuthActionTypes.FETCH_ERROR: {
+    case AuthActionTypes.FETCH_TOKENS_ERROR: {
       return { ...state, error: action.payload };
     }
 

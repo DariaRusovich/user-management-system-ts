@@ -1,21 +1,22 @@
 import { Dispatch } from 'redux';
 import { signin } from '../../api/apiServise';
-import { ActionType, TokensResponseData } from '../../types/auth';
+import { ActionType } from '../auth/types';
+import { TokensResponseData } from "../../types/auth";
 import { LoginData } from '../../types/auth';
 import { Cookie } from '../../utils/cookie';
 import { AuthActionTypes } from './actionTypes';
 
 const start = (): ActionType => {
-  return { type: AuthActionTypes.FETCH_START };
+  return { type: AuthActionTypes.FETCH_TOKENS_START };
 };
 const setTokens = (tokens: TokensResponseData): ActionType => {
   return { type: AuthActionTypes.SET_TOKENS, payload: tokens };
 };
 const setError = (error: string): ActionType => {
-  return { type: AuthActionTypes.FETCH_ERROR, payload: error };
+  return { type: AuthActionTypes.FETCH_TOKENS_ERROR, payload: error };
 };
 const end = (): ActionType => {
-  return { type: AuthActionTypes.FETCH_END };
+  return { type: AuthActionTypes.FETCH_TOKENS_END };
 };
 
 export const fetchTokens = (loginData: LoginData) => {

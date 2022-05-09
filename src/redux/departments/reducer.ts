@@ -9,7 +9,7 @@ const initialState: DepatmentsState = {
 
 export const DepartmentsReducer = (state = initialState, action: ActionType): DepatmentsState => {
   switch (action.type) {
-    case DepartmentsActionTypes.FETCH_START: {
+    case DepartmentsActionTypes.FETCH_DEPARTMENTS_START: {
       return { ...state, loading: true };
     }
     case DepartmentsActionTypes.SET_DEPARTMENTS: {
@@ -18,10 +18,10 @@ export const DepartmentsReducer = (state = initialState, action: ActionType): De
     case DepartmentsActionTypes.ADD_DEPARTMENT: {
       return { ...state, departments: [...state.departments, action.payload] };
     }
-    case DepartmentsActionTypes.FETCH_ERROR: {
+    case DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR: {
       return { ...state, error: action.payload };
     }
-    case DepartmentsActionTypes.FETCH_END: {
+    case DepartmentsActionTypes.FETCH_DEPARTMENTS_END: {
       return { ...state, loading: false };
     }
 
