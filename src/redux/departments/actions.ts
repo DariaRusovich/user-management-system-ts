@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import { getDepartments, addDepartment } from '../../api/apiServise';
+import { addDepartment, getDepartments } from '../../api/apiServise';
 import { IDepartment } from '../../types/departments';
-import { ActionType } from "../departments/types";
+import { ActionType } from '../departments/types';
 import { DepartmentsActionTypes } from './actionTypes';
 
 const start = (): ActionType => {
@@ -14,15 +14,25 @@ const addNewDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.ADD_DEPARTMENT, payload: department };
 };
 const setError = (error: string): ActionType => {
-  return { type: DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR, payload: error };
+  return {
+    type: DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR,
+    payload: error,
+  };
 };
 const end = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_DEPARTMENTS_END };
 };
 
-export const fetchDepartments = () => {
+const applyLoading = (fn: (dispatch: Dispatch<ActionType>) => void) => {
   return async (dispatch: Dispatch<ActionType>) => {
     dispatch(start());
+    await fn(dispatch);
+    dispatch(end());
+  };
+};
+
+export const fetchDepartments = () => {
+  return applyLoading(async (dispatch: Dispatch<ActionType>) => {
     const [departmentsDataError, departmentsData] = await getDepartments();
     if (departmentsData) {
       const departments = departmentsData.departments.departments;
@@ -30,20 +40,19 @@ export const fetchDepartments = () => {
     } else {
       dispatch(setError(departmentsDataError.response.data.message));
     }
-    dispatch(end());
-  };
+  });
 };
 
 export const fetchNewDepartment = (department: IDepartment) => {
-  return async (dispatch: Dispatch<ActionType>) => {
-    dispatch(start());
-    const [departmentDataError, departmentData] = await addDepartment(department)
+  return applyLoading(async (dispatch: Dispatch<ActionType>) => {
+    const [departmentDataError, departmentData] = await addDepartment(
+      department
+    );
     if (departmentData) {
-      const newDepartment = departmentData.department
-      dispatch(addNewDepartment(newDepartment))
+      const newDepartment = departmentData.department;
+      dispatch(addNewDepartment(newDepartment));
     } else {
-      dispatch(setError(departmentDataError.response.data.message))
+      dispatch(setError(departmentDataError.response.data.message));
     }
-    dispatch(end())
-  };
+  });
 };
