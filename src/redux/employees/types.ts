@@ -8,6 +8,10 @@ interface SetEmployees {
   type: EmployeesActionTypes.SET_EMPLOYEES;
   payload: EmployeeData[];
 }
+export interface FetchEmployees {
+  type: EmployeesActionTypes.FETCH_EMPLOYEES;
+  payload: string;
+}
 interface FetchError {
   type: EmployeesActionTypes.FETCH_EMPLOYEES_ERROR;
   payload: string;
@@ -15,4 +19,9 @@ interface FetchError {
 interface FetchEnd {
   type: EmployeesActionTypes.FETCH_EMPLOYEES_END;
 }
-export type ActionType = FetchStart | SetEmployees | FetchError | FetchEnd;
+export type ActionType =
+  | FetchStart
+  | SetEmployees
+  | FetchEmployees
+  | FetchError
+  | FetchEnd;
