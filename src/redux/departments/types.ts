@@ -8,6 +8,14 @@ interface SetDepartments {
   type: DepartmentsActionTypes.SET_DEPARTMENTS;
   payload: IDepartment[];
 }
+export interface FetchDepartments {
+  type: DepartmentsActionTypes.FETCH_DEPARTMENTS;
+  payload?: IDepartment[];
+}
+export interface FetchNewDepartment {
+  type: DepartmentsActionTypes.FETCH_NEW_DEPARTMENT;
+  payload: IDepartment;
+}
 interface AddDepartment {
   type: DepartmentsActionTypes.ADD_DEPARTMENT;
   payload: IDepartment;
@@ -21,6 +29,8 @@ interface FetchEnd {
 }
 export type ActionType =
   | FetchStart
+  | FetchNewDepartment
+  | FetchDepartments
   | SetDepartments
   | FetchError
   | FetchEnd

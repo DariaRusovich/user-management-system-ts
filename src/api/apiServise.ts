@@ -1,21 +1,21 @@
 import {
   DEPARTMENTS,
+  EMPLOYEES_URL,
   LOGIN_URL,
   LOGOUT_URL,
-  EMPLOYEES_URL,
 } from '../constants/urls';
 import {
   DepartmentData,
-  IDepartment,
   DepartmentsData,
+  IDepartment,
 } from '../types/departments';
 import { Employees } from '../types/employee';
 import { LoginData, TokensResponseData } from '../types/auth';
 import { api } from './interceptors';
 
 export function getDepartments(
-  limit: number = 10,
-  page: number = 1
+  limit = 10,
+  page = 1
 ): Promise<DepartmentsData[]> {
   return api.get(`${DEPARTMENTS}/?limit=${limit}&page=${page}`);
 }

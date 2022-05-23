@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { fetchEmployees } from '../redux/employees/actions';
 import { employeesSelector } from '../redux/employees/selectors';
 import Employee from './Employee';
@@ -38,9 +37,9 @@ const EmployeesList = () => {
           <button className="btn btn-success">+ Add employee</button>
         </div>
         <div className="item-list">
-          {employees.map((employee) => (
+          {employees.map((employee) => 
             <Employee key={employee._id} employee={employee} />
-          ))}
+          )}
         </div>
       </div>
     </section>

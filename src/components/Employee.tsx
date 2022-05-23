@@ -7,7 +7,6 @@ interface EmployeeProps {
 
 const Employee: FC<EmployeeProps> = ({ employee }) => {
   const { username, email, firstName, lastName } = employee
-  
   return (
     <div className="employee-item item-block">
       <img

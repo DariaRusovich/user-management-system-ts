@@ -16,7 +16,7 @@ const LoginForm: FC = () => {
 
   function handleSubmit(event: React.MouseEvent<HTMLFormElement>) {
     event.preventDefault();
-    const loginData: LoginData = { username: name, password: password };
+    const loginData: LoginData = { username: name, password: password }; 
     dispatch(fetchTokens(loginData));
     navigate('/');
   }

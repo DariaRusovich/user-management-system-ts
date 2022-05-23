@@ -1,5 +1,5 @@
 import LoginPage from './pages/LoginPage';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import PrivateRoute from './privateRoutes/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';

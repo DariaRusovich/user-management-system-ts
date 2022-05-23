@@ -8,7 +8,6 @@ import Loader from './Loader';
 
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,7 +15,7 @@ const DepartmentsList: FC = () => {
   }, []);
 
   if (error) {
-    return <Error />
+    return <Error />;
   }
 
   if (loading) {
