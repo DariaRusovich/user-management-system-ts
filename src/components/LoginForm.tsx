@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
@@ -13,9 +13,6 @@ const LoginForm: FC = () => {
   const { tokens, error, loading } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [name, setName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
   const validationsSchema = yup.object().shape({
     username: yup.string().required(),
     password: yup
