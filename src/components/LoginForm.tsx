@@ -71,7 +71,7 @@ const LoginForm: FC = () => {
                   required
                 />
                 {touched.username && errors.username && (
-                  <div className="">*{errors.username}</div>
+                  <div className="validation">*{errors.username}</div>
                 )}
                 <input
                   type="password"

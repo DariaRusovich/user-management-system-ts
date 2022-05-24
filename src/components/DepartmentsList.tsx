@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDepartments } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
+import AddDepartmentForm from '../modalForms/AddDepartmentForm';
 import Department from './Department';
 import Error from './Error';
 import Loader from './Loader';
@@ -29,6 +30,7 @@ const DepartmentsList: FC = () => {
           <button className="btn btn-success">+ Add department</button>
           <div className="form-wrap"></div>
         </div>
+        <AddDepartmentForm />
         <div className="item-list">
           {departments.map((department) => (
             <Department key={department._id} department={department} />
