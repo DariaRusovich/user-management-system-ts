@@ -17,9 +17,9 @@ const EmployeesList = () => {
     dispatch(fetchEmployees(id));
   }, [id]);
 
-  if (error) {
-    return <Error />;
-  }
+  // if (error) {
+  //   return <Error />;
+  // }
 
   if (loading) {
     return <Loader />;
@@ -28,9 +28,9 @@ const EmployeesList = () => {
   return (
     <section className="section">
       <div className="container section-wrap">
-        <AddEmployeeForm></AddEmployeeForm>
+        <AddEmployeeForm id={id}></AddEmployeeForm>
         <h1 className="title-secondary">
-          {employees.length} employees.{' '}
+          {employees.length} employees.
           <Link to="/" className="title">
             Go back
           </Link>
@@ -39,9 +39,9 @@ const EmployeesList = () => {
           <button className="btn btn-success">+ Add employee</button>
         </div>
         <div className="item-list">
-          {employees.map((employee) => 
+          {employees.map((employee) => (
             <Employee key={employee._id} employee={employee} />
-          )}
+          ))}
         </div>
       </div>
     </section>

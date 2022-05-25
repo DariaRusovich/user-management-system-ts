@@ -15,9 +15,9 @@ const DepartmentsList: FC = () => {
     dispatch(fetchDepartments());
   }, []);
 
-  if (error) {
-    return <Error />;
-  }
+  // if (error) {
+  //   return <Error />;
+  // }
 
   if (loading) {
     return <Loader />;

@@ -19,6 +19,9 @@ export const EmployeesReducer = (
     case EmployeesActionTypes.SET_EMPLOYEES: {
       return { ...state, employees: action.payload };
     }
+    case EmployeesActionTypes.ADD_EMPLOYEE: {
+      return { ...state, employees: [...state.employees, action.payload] };
+    }
     case EmployeesActionTypes.FETCH_EMPLOYEES_ERROR: {
       return { ...state, error: action.payload };
     }

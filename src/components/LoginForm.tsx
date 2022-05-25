@@ -22,7 +22,7 @@ const LoginForm: FC = () => {
       .matches(/[a-zA-Z]/, 'Password must contain Latin letters.'),
   });
 
-  function handleSubmit(values) {
+  function handleSubmit(values: LoginData) {
     const loginData: LoginData = {
       username: values.username,
       password: values.password,

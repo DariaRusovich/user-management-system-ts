@@ -1,15 +1,23 @@
 import { Formik } from 'formik';
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
+import { fetchNewEmployee } from '../redux/employees/actions';
+import { EmployeeData } from '../types/employee';
 
-const AddEmployeeForm: FC = () => {
+interface AddEmployeeFormProps {
+  id: string;
+}
+
+const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
+  const dispatch = useDispatch();
   const validationsSchema = yup.object().shape({
-    firstname: yup
+    firstName: yup
       .string()
       .required()
       .min(1, 'First Name is too short - should be 1 chars minimum.')
       .max(20, 'First Name is too long - should be 20 chars maximum.'),
-    lastname: yup
+    lastName: yup
       .string()
       .required()
       .min(1, 'Name is too short - should be 1 chars minimum.')
@@ -21,11 +29,27 @@ const AddEmployeeForm: FC = () => {
       .max(15, 'Name is too long - should be 15 chars maximum.'),
     email: yup.string().email().required(),
   });
+  function createNewEmployee(values: EmployeeData) {
+    const newEmployee: EmployeeData = {
+      firstName: values.firstName,
+      username: values.username,
+      lastName: values.lastName,
+      email: values.email,
+      department: id,
+    };
+    dispatch(fetchNewEmployee(newEmployee));
+  }
   return (
     <Formik
-      initialValues={{ firstname: '', lastname: '', username: '', email: '' }}
+      initialValues={{
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        department: '',
+      }}
       validateOnBlur
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => createNewEmployee(values)}
       validationSchema={validationsSchema}
     >
       {({
@@ -44,26 +68,26 @@ const AddEmployeeForm: FC = () => {
             <input
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.firstname}
+              value={values.firstName}
               type="text"
-              name="firstname"
+              name="firstName"
               placeholder="Employee first name"
               required
             />
-            {touched.firstname && errors.firstname && (
-              <div className="validation">{errors.firstname}</div>
+            {touched.firstName && errors.firstName && (
+              <div className="validation">{errors.firstName}</div>
             )}
             <input
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.lastname}
+              value={values.lastName}
               type="text"
-              name="lastname"
+              name="lastName"
               placeholder="Employee last name"
               required
             />
-            {touched.lastname && errors.lastname && (
-              <div className="validation">{errors.lastname}</div>
+            {touched.lastName && errors.lastName && (
+              <div className="validation">{errors.lastName}</div>
             )}
             <input
               onChange={handleChange}
@@ -95,7 +119,7 @@ const AddEmployeeForm: FC = () => {
                 className="btn btn-success"
                 disabled={!isValid && !dirty}
               >
-                Add department
+                Add employee
               </button>
               <button type="reset" className="btn btn-danger">
                 Cancel

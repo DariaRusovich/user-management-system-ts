@@ -6,6 +6,7 @@ import { IDepartment } from '../types/departments';
 import * as yup from 'yup';
 
 const AddDepartmentForm: FC = () => {
+  const dispatch = useDispatch();
   const validationsSchema = yup.object().shape({
     name: yup
       .string()
@@ -18,9 +19,8 @@ const AddDepartmentForm: FC = () => {
       .min(5, 'Description is too short - should be 5 chars minimum.')
       .max(50, 'Description is too long - should be 50 chars maximum.'),
   });
-  const dispatch = useDispatch();
-
-  function createNewDepartment(values) {
+  
+  function createNewDepartment(values: IDepartment) {
     const newDepartment: IDepartment = {
       name: values.name,
       description: values.description,
