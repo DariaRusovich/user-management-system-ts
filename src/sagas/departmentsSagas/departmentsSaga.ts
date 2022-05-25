@@ -42,6 +42,18 @@ function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(end());
 }
 
+function* fetchOneDepartment(id) {
+  const [departmentDataError, departmentData] = yield call(
+    api.get,
+    `${DEPARTMENTS}/${id}`
+  );
+  if (departmentData) {
+    
+  } else {
+    
+  }
+}
+
 export function* fetchDepartmentsWatcher() {
   yield takeEvery(
     DepartmentsActionTypes.FETCH_DEPARTMENTS,
