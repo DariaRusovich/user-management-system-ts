@@ -59,6 +59,8 @@ function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   }
 }
 
+function* fetchUpdatedDepartmentWorker({ payload }) {}
+
 export function* fetchDepartmentsWatcher() {
   yield takeEvery(
     DepartmentsActionTypes.FETCH_DEPARTMENTS,

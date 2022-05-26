@@ -1,16 +1,11 @@
 import { Formik } from 'formik';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
-import { fetchNewEmployee } from '../redux/employees/actions';
 import { EmployeeData } from '../types/employee';
-
-interface AddEmployeeFormProps {
-  id: string;
+interface EditEmployeeFormProps {
+  employee: EmployeeData;
 }
-
-const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
-  const dispatch = useDispatch();
+const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
   const validationsSchema = yup.object().shape({
     firstName: yup
       .string()
@@ -29,27 +24,16 @@ const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
       .max(15, 'User Name is too long - should be 15 chars maximum.'),
     email: yup.string().email().required(),
   });
-  function createNewEmployee(values: EmployeeData) {
-    const newEmployee: EmployeeData = {
-      firstName: values.firstName,
-      username: values.username,
-      lastName: values.lastName,
-      email: values.email,
-      department: id,
-    };
-    dispatch(fetchNewEmployee(newEmployee));
-  }
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
-        department: '',
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        username: employee.username,
+        email: employee.email,
       }}
       validateOnBlur
-      onSubmit={(values) => createNewEmployee(values)}
+      onSubmit={(values) => console.log(values)}
       validationSchema={validationsSchema}
     >
       {({
@@ -95,6 +79,7 @@ const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
               value={values.username}
               type="text"
               name="username"
+              disabled
               placeholder="Employee username"
               required
             />
@@ -119,7 +104,7 @@ const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
                 className="btn btn-success"
                 disabled={!isValid && !dirty}
               >
-                Add employee
+                Edit employee
               </button>
               <button type="reset" className="btn btn-danger">
                 Cancel
@@ -132,4 +117,4 @@ const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
   );
 };
 
-export default AddEmployeeForm;
+export default EditEmployeeForm;

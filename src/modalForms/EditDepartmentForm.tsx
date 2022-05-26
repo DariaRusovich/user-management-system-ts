@@ -1,9 +1,6 @@
 import { Formik } from 'formik';
-import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
 import * as yup from 'yup';
-import { fetchDepartment } from '../redux/departments/actions';
-import { departmentsSelector } from '../redux/departments/selectors';
 import { IDepartment } from '../types/departments';
 
 interface EditDepartmentFormProps {
@@ -11,16 +8,6 @@ interface EditDepartmentFormProps {
 }
 
 const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
-  const dispatch = useDispatch();
-  const { departmentData } = useSelector(departmentsSelector);
-  const { name, description } = departmentData;
-  const departmentId = department._id;
-  console.log(departmentData);
-
-  useEffect(() => {
-    dispatch(fetchDepartment(departmentId!));
-  }, []);
-
   const validationsSchema = yup.object().shape({
     name: yup
       .string()
@@ -35,7 +22,10 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
   });
   return (
     <Formik
-      initialValues={{ name: name, description: description }}
+      initialValues={{
+        name: department.name,
+        description: department.description,
+      }}
       validateOnBlur
       onSubmit={(values) => console.log(values)}
       validationSchema={validationsSchema}
@@ -53,18 +43,19 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
         <form className="add-form form" onSubmit={handleSubmit}>
           <fieldset>
             <legend>Edit department</legend>
-            <div className="input-wrapper">
-              <input
-                onChange={handleChange}
-                onBlur={handleBlur}
-                type="text"
-                name="name"
-                placeholder="Department name"
-                value={values.name}
-                disabled
-                required
-              />
-            </div>
+            <input
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="text"
+              name="name"
+              placeholder="Department name"
+              value={values.name}
+              disabled
+              required
+            />
+            {touched.name && errors.name && (
+              <div className="validation">{errors.name}</div>
+            )}
             <textarea
               onChange={handleChange}
               onBlur={handleBlur}
@@ -73,9 +64,15 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
               value={values.description}
               required
             ></textarea>
-            <div className="validation">*Required</div>
+            {touched.description && errors.description && (
+              <div className="validation">{errors.description}</div>
+            )}
             <div className="btns-wrap">
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                disabled={!isValid && !dirty}
+              >
                 Edit
               </button>
               <button type="reset" className="btn btn-danger">

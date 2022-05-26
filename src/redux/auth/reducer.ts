@@ -4,6 +4,7 @@ import { ActionType } from '../auth/types';
 
 const InitialState: AuthState = {
   tokens: null,
+  cookie: null,
   loading: false,
   error: null,
 };

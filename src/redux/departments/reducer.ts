@@ -1,11 +1,9 @@
 import { DepartmentsActionTypes } from './actionTypes';
 import { DepatmentsState } from '../../types/departments';
 import { ActionType } from '../departments/types';
-import { IDepartment } from "../../types/departments";
 
 const initialState: DepatmentsState = {
   departments: [],
-  departmentData: ,
   departmentId: '',
   loading: false,
   error: null,
