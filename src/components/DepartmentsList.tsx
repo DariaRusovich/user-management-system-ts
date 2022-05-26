@@ -6,6 +6,7 @@ import AddDepartmentForm from '../modalForms/AddDepartmentForm';
 import Department from './Department';
 import Error from './Error';
 import Loader from './Loader';
+import EditDepartmentForm from '../modalForms/EditDepartmentForm';
 
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
@@ -30,7 +31,6 @@ const DepartmentsList: FC = () => {
           <button className="btn btn-success">+ Add department</button>
           <div className="form-wrap"></div>
         </div>
-        <AddDepartmentForm />
         <div className="item-list">
           {departments.map((department) => (
             <Department key={department._id} department={department} />

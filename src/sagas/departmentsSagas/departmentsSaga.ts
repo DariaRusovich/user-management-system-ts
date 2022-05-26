@@ -5,13 +5,17 @@ import {
   start,
   end,
   setDepartments,
+  setDepartment,
   setError,
   addNewDepartment,
 } from '../../redux/departments/actions';
 import { DepartmentsActionTypes } from '../../redux/departments/actionTypes';
-import { FetchNewDepartment } from '../../redux/departments/types';
+import {
+  FetchDepartment,
+  FetchNewDepartment,
+} from '../../redux/departments/types';
 
-function* fetchDepartmentsWorker(limit = 10, page = 1) {
+function* fetchDepartmentsWorker(limit = 5, page = 1) {
   yield put(start());
   const [departmentsDataError, departmentsData] = yield call(
     api.get,
@@ -42,15 +46,16 @@ function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(end());
 }
 
-function* fetchOneDepartment(id) {
+function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   const [departmentDataError, departmentData] = yield call(
     api.get,
-    `${DEPARTMENTS}/${id}`
+    `${DEPARTMENTS}/${payload}`
   );
   if (departmentData) {
-    
+    const department = departmentData.departmentByID;
+    yield put(setDepartment(department));
   } else {
-    
+    yield put(setError(departmentDataError));
   }
 }
 
@@ -62,5 +67,9 @@ export function* fetchDepartmentsWatcher() {
   yield takeEvery(
     DepartmentsActionTypes.FETCH_NEW_DEPARTMENT,
     fetchNewDepartmentWorker
+  );
+  yield takeEvery(
+    DepartmentsActionTypes.FETCH_DEPARTMENT,
+    fetchOneDepartmentWorker
   );
 }

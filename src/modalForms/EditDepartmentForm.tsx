@@ -1,8 +1,26 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
+import { fetchDepartment } from '../redux/departments/actions';
+import { departmentsSelector } from '../redux/departments/selectors';
+import { IDepartment } from '../types/departments';
 
-const EditDepartmentForm: FC = () => {
+interface EditDepartmentFormProps {
+  department: IDepartment;
+}
+
+const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
+  const dispatch = useDispatch();
+  const { departmentData } = useSelector(departmentsSelector);
+  const { name, description } = departmentData;
+  const departmentId = department._id;
+  console.log(departmentData);
+
+  useEffect(() => {
+    dispatch(fetchDepartment(departmentId!));
+  }, []);
+
   const validationsSchema = yup.object().shape({
     name: yup
       .string()
@@ -17,7 +35,7 @@ const EditDepartmentForm: FC = () => {
   });
   return (
     <Formik
-      initialValues={{ name: '', description: '' }}
+      initialValues={{ name: name, description: description }}
       validateOnBlur
       onSubmit={(values) => console.log(values)}
       validationSchema={validationsSchema}
@@ -32,7 +50,7 @@ const EditDepartmentForm: FC = () => {
         handleSubmit,
         dirty,
       }) => (
-        <form className="add-form form" onSubmit={handleSubmit} onReset={close}>
+        <form className="add-form form" onSubmit={handleSubmit}>
           <fieldset>
             <legend>Edit department</legend>
             <div className="input-wrapper">
@@ -46,7 +64,6 @@ const EditDepartmentForm: FC = () => {
                 disabled
                 required
               />
-              <div className="validation">*Required</div>
             </div>
             <textarea
               onChange={handleChange}
@@ -56,6 +73,7 @@ const EditDepartmentForm: FC = () => {
               value={values.description}
               required
             ></textarea>
+            <div className="validation">*Required</div>
             <div className="btns-wrap">
               <button type="submit" className="btn btn-success">
                 Edit
