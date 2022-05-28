@@ -5,7 +5,6 @@ import * as yup from 'yup';
 import { fetchUpdatedDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
 
-
 interface EditDepartmentFormProps {
   department: IDepartment;
 }

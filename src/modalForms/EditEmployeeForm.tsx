@@ -1,11 +1,20 @@
 import { Formik } from 'formik';
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
+import { fetchUpdatedEmployee } from '../redux/employees/actions';
 import { EmployeeData } from '../types/employee';
+
+
 interface EditEmployeeFormProps {
   employee: EmployeeData;
 }
 const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
+  const dispatch = useDispatch();
+  const employeeId = employee._id;
+  const { id } = useParams() as { id: string };
+  
   const validationsSchema = yup.object().shape({
     firstName: yup
       .string()
@@ -24,6 +33,18 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
       .max(15, 'User Name is too long - should be 15 chars maximum.'),
     email: yup.string().email().required(),
   });
+
+  const updateEmployee = (values: EmployeeData) => {
+    const updatedEmployee = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      username: values.username,
+      email: values.email,
+      department: id,
+    };
+    dispatch(fetchUpdatedEmployee(employeeId!, updatedEmployee))
+  };
+
   return (
     <Formik
       initialValues={{
@@ -31,9 +52,10 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
         lastName: employee.lastName,
         username: employee.username,
         email: employee.email,
+        department: id,
       }}
       validateOnBlur
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => updateEmployee(values)}
       validationSchema={validationsSchema}
     >
       {({
@@ -48,7 +70,7 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
       }) => (
         <form className="add-form form" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Add employee</legend>
+            <legend>Edit employee</legend>
             <input
               onChange={handleChange}
               onBlur={handleBlur}

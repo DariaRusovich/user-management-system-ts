@@ -22,6 +22,13 @@ export const EmployeesReducer = (
     case EmployeesActionTypes.ADD_EMPLOYEE: {
       return { ...state, employees: [...state.employees, action.payload] };
     }
+    case EmployeesActionTypes.UPDATE_EMPLOYEE: {
+      const copiedState = state.employees;
+      const updatedEmployees = copiedState.map((employee) =>
+        employee._id === action.payload._id ? action.payload : employee
+      );
+      return { ...state, employees: updatedEmployees };
+    }
     case EmployeesActionTypes.FETCH_EMPLOYEES_ERROR: {
       return { ...state, error: action.payload };
     }

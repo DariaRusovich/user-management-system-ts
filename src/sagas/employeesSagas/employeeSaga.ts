@@ -7,9 +7,10 @@ import {
   setEmployees,
   setError,
   addNewEmployee,
+  updateEmployee,
 } from '../../redux/employees/actions';
 import { EmployeesActionTypes } from '../../redux/employees/actionTypes';
-import { FetchEmployees, FetchNewEmployee } from '../../redux/employees/types';
+import { FetchEmployees, FetchNewEmployee, FetchUpdatedEmployee } from '../../redux/employees/types';
 
 function* fetchEmployeeWorker({ payload }: FetchEmployees) {
   yield put(start());
@@ -41,11 +42,32 @@ function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   }
   yield put(end());
 }
+function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
+  yield put(start());
+  const [updatedEmployeeDataError, updatedEmployeeData] = yield call(
+    api.patch,
+    `${EMPLOYEES_URL}/${id}`,
+    payload
+  );
+  if (updatedEmployeeData) {
+    const updatedEmployee = updatedEmployeeData.updatedEmployee;
+    yield put(updateEmployee(updatedEmployee));
+    console.log(updatedEmployee);
+    
+  } else {
+    yield put(setError(updatedEmployeeDataError));
+  }
+  yield put(end());
+}
 
 export function* fetchEmployeeWatcher() {
   yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeeWorker);
   yield takeEvery(
     EmployeesActionTypes.FETCH_NEW_EMPLOYEE,
     fetchNewEmployeeWorker
+  );
+  yield takeEvery(
+    EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE,
+    fetchUpdatedEmployeeWorker
   );
 }

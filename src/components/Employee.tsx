@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import EditEmployeeForm from '../modalForms/EditEmployeeForm';
 import { EmployeeData } from '../types/employee';
 
 interface EmployeeProps {
@@ -9,6 +10,7 @@ const Employee: FC<EmployeeProps> = ({ employee }) => {
   const { username, email, firstName, lastName } = employee
   return (
     <div className="employee-item item-block">
+      <EditEmployeeForm employee={employee}/>
       <img
         className="item__img"
         src="#"
