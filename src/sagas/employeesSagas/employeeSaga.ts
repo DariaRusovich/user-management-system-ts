@@ -52,8 +52,6 @@ function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   if (updatedEmployeeData) {
     const updatedEmployee = updatedEmployeeData.updatedEmployee;
     yield put(updateEmployee(updatedEmployee));
-    console.log(updatedEmployee);
-    
   } else {
     yield put(setError(updatedEmployeeDataError));
   }
