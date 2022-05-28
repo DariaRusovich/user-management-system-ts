@@ -1,13 +1,18 @@
 import { Formik } from 'formik';
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
+import { fetchUpdatedDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
+
 
 interface EditDepartmentFormProps {
   department: IDepartment;
 }
 
 const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
+  const dispatch = useDispatch()
+  const departmentId = department._id
   const validationsSchema = yup.object().shape({
     name: yup
       .string()
@@ -20,14 +25,24 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
       .min(5, 'Description is too short - should be 5 chars minimum.')
       .max(50, 'Description is too long - should be 50 chars maximum.'),
   });
+
+  function updateDepartment(values: IDepartment) {
+    const updatedDepartment: IDepartment = {
+      name: values.name,
+      description: values.description,
+    };
+    dispatch(fetchUpdatedDepartment(departmentId!, updatedDepartment));
+  }
+
   return (
     <Formik
       initialValues={{
         name: department.name,
         description: department.description,
+        
       }}
       validateOnBlur
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => updateDepartment(values)}
       validationSchema={validationsSchema}
     >
       {({

@@ -27,8 +27,8 @@ const LoginForm: FC = () => {
       username: values.username,
       password: values.password,
     };
-    dispatch(fetchTokens(loginData));
     navigate('/');
+    dispatch(fetchTokens(loginData));
   }
 
   if (loading) {

@@ -23,6 +23,12 @@ export const fetchNewDepartment = (department: IDepartment): ActionType => {
 export const addNewDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.ADD_DEPARTMENT, payload: department };
 };
+export const fetchUpdatedDepartment = (id: string ,updatedDepartment: IDepartment): ActionType => {
+  return { type: DepartmentsActionTypes.FETCH_UPDATED_DEPARTMENT, id, payload: updatedDepartment}
+}
+export const updateDepartment = (departments: IDepartment): ActionType => {
+  return { type: DepartmentsActionTypes.UPDATE_DEPARTMENT, payload: departments };
+};
 export const setError = (error: string): ActionType => {
   return {
     type: DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR,

@@ -26,7 +26,7 @@ export interface Results {
 }
 export interface DepatmentsState {
   departments: IDepartment[];
-  departmentData?: IDepartment;
+  department: IDepartment;
   departmentId: string;
   loading: boolean;
   error: null | string;
