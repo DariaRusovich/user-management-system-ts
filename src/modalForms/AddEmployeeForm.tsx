@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchNewEmployee } from '../redux/employees/actions';
 import { EmployeeData } from '../types/employee';
@@ -12,13 +12,17 @@ interface AddEmployeeFormProps {
 const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
   const dispatch = useDispatch();
 
-  function createNewEmployee(values: EmployeeData) {
-    const newEmployee: EmployeeData = {
-      ...values,
-      department: id,
-    };
-    dispatch(fetchNewEmployee(newEmployee));
-  }
+  const createNewEmployee = useCallback(
+    (values: EmployeeData) => {
+      const newEmployee: EmployeeData = {
+        ...values,
+        department: id,
+      };
+      dispatch(fetchNewEmployee(newEmployee));
+    },
+    [dispatch, id]
+  );
+
   return (
     <Formik
       initialValues={{
@@ -29,7 +33,7 @@ const AddEmployeeForm: FC<AddEmployeeFormProps> = ({ id }) => {
         department: '',
       }}
       validateOnBlur
-      onSubmit={(values) => createNewEmployee(values)}
+      onSubmit={createNewEmployee}
       validationSchema={employeesValidationsSchema}
     >
       {({

@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
@@ -14,14 +14,14 @@ const LoginForm: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleSubmit(values: LoginData) {
+  const handleAuthSubmit = useCallback((values: LoginData) => {
     const loginData: LoginData = {
       username: values.username,
       password: values.password,
     };
-    navigate('/');
     dispatch(fetchTokens(loginData));
-  }
+    navigate('/');
+  }, [dispatch, navigate]);
 
   if (loading) {
     return <Loader />;
@@ -37,7 +37,7 @@ const LoginForm: FC = () => {
         <Formik
           initialValues={{ username: '', password: '' }}
           validateOnBlur
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={handleAuthSubmit}
           validationSchema={authValidationsSchema}
         >
           {({

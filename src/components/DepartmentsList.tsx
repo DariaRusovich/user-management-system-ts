@@ -14,7 +14,7 @@ const DepartmentsList: FC = () => {
 
   useEffect(() => {
     dispatch(fetchDepartments());
-  }, []);
+  }, [dispatch]);
 
   // if (error) {
   //   return <Error />;

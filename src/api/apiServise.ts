@@ -1,5 +1,4 @@
 import {
-  BASE_URL,
   DEPARTMENTS,
   EMPLOYEES_URL,
   LOGIN_URL,
@@ -13,7 +12,6 @@ import {
 import { EmployeeData, Employees } from '../types/employee';
 import { LoginData, TokensResponseData } from '../types/auth';
 import { api } from './interceptors';
-import axios from 'axios';
 
 export function getDepartments(
   limit = 10,

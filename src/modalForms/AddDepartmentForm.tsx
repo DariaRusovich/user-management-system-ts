@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { createNewDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
@@ -7,17 +7,22 @@ import { departmentsValidationSchema } from '../utils/validation/departmentsVali
 
 const AddDepartmentForm: FC = () => {
   const dispatch = useDispatch();
-  function createDepartment(values: IDepartment) {
-    const newDepartment: IDepartment = {
-      ...values,
-    };
-    dispatch(createNewDepartment(newDepartment));
-  }
+
+  const createDepartment = useCallback(
+    (values: IDepartment) => {
+      const newDepartment: IDepartment = {
+        ...values,
+      };
+      dispatch(createNewDepartment(newDepartment));
+    },
+    [dispatch]
+  );
+
   return (
     <Formik
       initialValues={{ name: '', description: '' }}
       validateOnBlur
-      onSubmit={(values) => createDepartment(values)}
+      onSubmit={createDepartment}
       validationSchema={departmentsValidationSchema}
     >
       {({

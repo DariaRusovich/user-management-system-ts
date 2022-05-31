@@ -17,7 +17,7 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
   const updateEmployee = useCallback((values: EmployeeData) => {
     const updatedEmployee = { ...values, department: id };
     dispatch(fetchUpdatedEmployee(employeeId!, updatedEmployee));
-  }, []);
+  }, [dispatch, employeeId, id]);
 
   return (
     <Formik

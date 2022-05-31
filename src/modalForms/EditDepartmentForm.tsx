@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUpdatedDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
@@ -13,12 +13,15 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
   const dispatch = useDispatch();
   const departmentId = department._id;
 
-  function updateDepartment(values: IDepartment) {
-    const updatedDepartment: IDepartment = {
-      ...values,
-    };
-    dispatch(fetchUpdatedDepartment(departmentId!, updatedDepartment));
-  }
+  const updateDepartment = useCallback(
+    (values: IDepartment) => {
+      const updatedDepartment: IDepartment = {
+        ...values,
+      };
+      dispatch(fetchUpdatedDepartment(departmentId!, updatedDepartment));
+    },
+    [dispatch, departmentId]
+  );
 
   return (
     <Formik
@@ -27,7 +30,7 @@ const EditDepartmentForm: FC<EditDepartmentFormProps> = ({ department }) => {
         description: department.description,
       }}
       validateOnBlur
-      onSubmit={(values) => updateDepartment(values)}
+      onSubmit={updateDepartment}
       validationSchema={departmentsValidationSchema}
     >
       {({
