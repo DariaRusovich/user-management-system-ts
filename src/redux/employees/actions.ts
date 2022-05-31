@@ -11,11 +11,21 @@ export const setEmployees = (employees: EmployeeData[]): ActionType => {
 export const fetchEmployees = (id: string): ActionType => {
   return { type: EmployeesActionTypes.FETCH_EMPLOYEES, payload: id };
 };
+export const fetchNewEmployee = (employee: EmployeeData) => {
+  return { type: EmployeesActionTypes.FETCH_NEW_EMPLOYEE, payload: employee };
+};
+export const fetchUpdatedEmployee = (id: string, updatedEmployee: EmployeeData): ActionType => {
+  return { type: EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE, id, payload: updatedEmployee};
+};
+export const addNewEmployee = (employee: EmployeeData): ActionType => {
+  return { type: EmployeesActionTypes.ADD_EMPLOYEE, payload: employee };
+};
+export const updateEmployee = (employees: EmployeeData): ActionType => {
+  return { type: EmployeesActionTypes.UPDATE_EMPLOYEE, payload: employees };
+};
 export const setError = (error: string): ActionType => {
   return { type: EmployeesActionTypes.FETCH_EMPLOYEES_ERROR, payload: error };
 };
-
 export const end = (): ActionType => {
   return { type: EmployeesActionTypes.FETCH_EMPLOYEES_END };
 };
-

@@ -4,6 +4,7 @@ import { ActionType } from '../auth/types';
 
 const InitialState: AuthState = {
   tokens: null,
+  cookie: null,
   loading: false,
   error: null,
 };
@@ -25,7 +26,6 @@ export const AuthReducer = (
     case AuthActionTypes.FETCH_TOKENS_ERROR: {
       return { ...state, error: action.payload };
     }
-
     default:
       return state;
   }

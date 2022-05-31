@@ -5,8 +5,8 @@ export interface EmployeeData {
   email: string;
   firstName: string;
   lastName: string;
-  department_id: string;
-  _id: string;
+  department: string;
+  _id?: string;
   picture?: string;
 }
 export interface Employees {

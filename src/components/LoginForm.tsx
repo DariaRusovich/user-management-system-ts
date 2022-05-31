@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react';
+import { Formik } from 'formik';
+import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
 import { authSelector } from '../redux/auth/selectors';
 import { LoginData } from '../types/auth';
+import { authValidationsSchema } from '../utils/validation/authValidation';
 import Error from './Error';
 import Loader from './Loader';
 
@@ -11,52 +13,81 @@ const LoginForm: FC = () => {
   const { tokens, error, loading } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [name, setName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
 
-  function handleSubmit(event: React.MouseEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const loginData: LoginData = { username: name, password: password }; 
+  const handleAuthSubmit = useCallback((values: LoginData) => {
+    const loginData: LoginData = {
+      username: values.username,
+      password: values.password,
+    };
     dispatch(fetchTokens(loginData));
-    navigate('/');
-  }
+    navigate('/')
+  }, [dispatch, navigate]);
+
   if (loading) {
     return <Loader />;
   }
+
   if (error) {
     return <Error />;
   }
+
   return (
     <section className="section">
       <div className="container form-wrap">
-        <form className="login-form form" onSubmit={handleSubmit}>
-          <fieldset className="title">
-            <legend>Login form</legend>
-            <div className="input-wrapper">
-              <input
-                type="text"
-                name="username"
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Username"
-                required
-              />
-              <div className="validation">*Required</div>
-            </div>
-            <div className="input-wrapper">
-              <input
-                type="password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-              />
-              <div className="validation">*Required</div>
-            </div>
-            <button type="submit" className="btn btn-success">
-              Login
-            </button>
-          </fieldset>
-        </form>
+        <Formik
+          initialValues={{ username: '', password: '' }}
+          validateOnBlur
+          onSubmit={handleAuthSubmit}
+          validationSchema={authValidationsSchema}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            isValid,
+            handleSubmit,
+            dirty,
+          }) => (
+            <form className="login-form form" onSubmit={handleSubmit}>
+              <fieldset className="title">
+                <legend>Login form</legend>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.username}
+                  placeholder="Username"
+                  required
+                />
+                {touched.username && errors.username && (
+                  <div className="validation">*{errors.username}</div>
+                )}
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  placeholder="Password"
+                  required
+                />
+                {touched.password && errors.password && (
+                  <div className="validation">*{errors.password}</div>
+                )}
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  disabled={!isValid && !dirty}
+                >
+                  Login
+                </button>
+              </fieldset>
+            </form>
+          )}
+        </Formik>
       </div>
     </section>
   );

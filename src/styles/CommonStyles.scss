@@ -36,6 +36,9 @@
 .title-secondary a:hover {
   color: $primary-color-hover;
 }
+.title-secondary>span {
+  text-transform: uppercase;
+}
 .title-primary + .wrapper,
 .title-secondary + .wrapper{
   margin-top: 20px;

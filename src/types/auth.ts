@@ -33,4 +33,5 @@ export interface AuthState {
   loading: boolean;
   error: null | string;
   tokens: TokensResponseData | null;
+  cookie: TokensResponseData | null;
 }

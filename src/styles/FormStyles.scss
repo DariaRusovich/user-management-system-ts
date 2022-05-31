@@ -90,19 +90,11 @@
   position: relative;
 }
 .validation {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(0, -20%);
-  text-transform: none;
-  opacity: 0;
+  margin-top: 20px;
   color: $danger-color;
-  transition: all 0.35s;
+  text-transform: uppercase;
 }
-.input-wrapper input:invalid ~ .validation {
-  opacity: 1;
-  transform: translate(-50%, -20%);
-}
+
 .warning-message {
   margin-top: 10px;
   color: $danger-color;
