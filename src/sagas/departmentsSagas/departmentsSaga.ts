@@ -1,7 +1,10 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { getDepartment, getDepartments, updateDepartments, addDepartment } from '../../api/apiServise';
-import { api } from '../../api/interceptors';
-import { DEPARTMENTS } from '../../constants/urls';
+import {
+  getDepartment,
+  getDepartments,
+  updateDepartments,
+  addDepartment,
+} from '../../api/apiServise';
 import {
   start,
   end,
@@ -17,9 +20,8 @@ import {
   FetchNewDepartment,
   FetchUpdatedDepartment,
 } from '../../redux/departments/types';
-import * as Effects from "redux-saga/effects";
+import * as Effects from 'redux-saga/effects';
 const call: any = Effects.call;
-
 
 function* fetchDepartmentsWorker() {
   yield put(start());
@@ -35,9 +37,10 @@ function* fetchDepartmentsWorker() {
 
 function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(start());
-  const [departmentDataError, departmentData] = yield call(addDepartment, payload);
-  console.log(payload);
-  
+  const [departmentDataError, departmentData] = yield call(
+    addDepartment,
+    payload
+  );
   if (departmentData) {
     const newDepartment = departmentData.department;
     yield put(addNewDepartment(newDepartment));
@@ -49,7 +52,8 @@ function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
 
 function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   const [departmentDataError, departmentData] = yield call(
-    getDepartment, payload
+    getDepartment,
+    payload
   );
   if (departmentData) {
     const department = departmentData.departmentByID;
@@ -59,10 +63,16 @@ function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   }
 }
 
-function* fetchUpdatedDepartmentWorker({ id, payload }: FetchUpdatedDepartment) {
+function* fetchUpdatedDepartmentWorker({
+  id,
+  payload,
+}: FetchUpdatedDepartment) {
   yield put(start());
   const [updatedDepartmentDataError, updatedDepartmentData] = yield call(
-    updateDepartments, id , payload);
+    updateDepartments,
+    id,
+    payload
+  );
   if (updatedDepartmentData) {
     const updatedDepartment = updatedDepartmentData.updatedDescription;
     yield put(updateDepartment(updatedDepartment));

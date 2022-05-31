@@ -1,4 +1,9 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
+import {
+  getEmployees,
+  addEmployee,
+  updateEmployees,
+} from '../../api/apiServise';
 import { api } from '../../api/interceptors';
 import { DEPARTMENTS, EMPLOYEES_URL } from '../../constants/urls';
 import {
@@ -10,14 +15,17 @@ import {
   updateEmployee,
 } from '../../redux/employees/actions';
 import { EmployeesActionTypes } from '../../redux/employees/actionTypes';
-import { FetchEmployees, FetchNewEmployee, FetchUpdatedEmployee } from '../../redux/employees/types';
+import {
+  FetchEmployees,
+  FetchNewEmployee,
+  FetchUpdatedEmployee,
+} from '../../redux/employees/types';
+import * as Effects from 'redux-saga/effects';
+const call: any = Effects.call;
 
-function* fetchEmployeeWorker({ payload }: FetchEmployees) {
+function* fetchEmployeesWorker({ payload }: FetchEmployees) {
   yield put(start());
-  const [employeesDataError, employeesData] = yield call(
-    api.get,
-    `${DEPARTMENTS}/${payload}${EMPLOYEES_URL}`
-  );
+  const [employeesDataError, employeesData] = yield call(getEmployees, payload);
   if (employeesData) {
     const employees = employeesData.employees;
     yield put(setEmployees(employees));
@@ -29,11 +37,7 @@ function* fetchEmployeeWorker({ payload }: FetchEmployees) {
 
 function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   yield put(start());
-  const [employeeDataError, employeeData] = yield call(
-    api.post,
-    `${EMPLOYEES_URL}/`,
-    payload
-  );
+  const [employeeDataError, employeeData] = yield call(addEmployee, payload);
   if (employeeData) {
     const employee = employeeData.employee;
     yield put(addNewEmployee(employee));
@@ -45,8 +49,8 @@ function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
 function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(start());
   const [updatedEmployeeDataError, updatedEmployeeData] = yield call(
-    api.patch,
-    `${EMPLOYEES_URL}/${id}`,
+    updateEmployees,
+    id,
     payload
   );
   if (updatedEmployeeData) {
@@ -59,7 +63,7 @@ function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
 }
 
 export function* fetchEmployeeWatcher() {
-  yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeeWorker);
+  yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeesWorker);
   yield takeEvery(
     EmployeesActionTypes.FETCH_NEW_EMPLOYEE,
     fetchNewEmployeeWorker
