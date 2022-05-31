@@ -4,8 +4,6 @@ import {
   addEmployee,
   updateEmployees,
 } from '../../api/apiServise';
-import { api } from '../../api/interceptors';
-import { DEPARTMENTS, EMPLOYEES_URL } from '../../constants/urls';
 import {
   start,
   end,
