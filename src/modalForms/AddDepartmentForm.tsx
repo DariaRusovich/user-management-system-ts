@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchNewDepartment } from '../redux/departments/actions';
+import { createNewDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
 import * as yup from 'yup';
 
@@ -20,19 +20,19 @@ const AddDepartmentForm: FC = () => {
       .max(50, 'Description is too long - should be 50 chars maximum.'),
   });
   
-  function createNewDepartment(values: IDepartment) {
+  function createDepartment(values: IDepartment) {
     const newDepartment: IDepartment = {
       name: values.name,
       description: values.description,
     };
-    dispatch(fetchNewDepartment(newDepartment));
+    dispatch(createNewDepartment(newDepartment));
   }
 
   return (
       <Formik
         initialValues={{ name: '', description: '' }}
         validateOnBlur
-        onSubmit={(values) => createNewDepartment(values)}
+        onSubmit={(values) => createDepartment(values)}
         validationSchema={validationsSchema}
       >
         {({

@@ -27,6 +27,7 @@ const DepartmentsList: FC = () => {
   return (
     <section className="section">
       <div className="container section-wrap">
+        <AddDepartmentForm></AddDepartmentForm>
         <div className="wrapper">
           <button className="btn btn-success">+ Add department</button>
           <div className="form-wrap"></div>

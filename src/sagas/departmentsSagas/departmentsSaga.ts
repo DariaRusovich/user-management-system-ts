@@ -1,4 +1,5 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
+import { getDepartment, getDepartments, updateDepartments, addDepartment } from '../../api/apiServise';
 import { api } from '../../api/interceptors';
 import { DEPARTMENTS } from '../../constants/urls';
 import {
@@ -16,13 +17,13 @@ import {
   FetchNewDepartment,
   FetchUpdatedDepartment,
 } from '../../redux/departments/types';
+import * as Effects from "redux-saga/effects";
+const call: any = Effects.call;
 
-function* fetchDepartmentsWorker(limit = 5, page = 1) {
+
+function* fetchDepartmentsWorker() {
   yield put(start());
-  const [departmentsDataError, departmentsData] = yield call(
-    api.get,
-    `${DEPARTMENTS}/?limit=${limit}&page=${page}`
-  );
+  const [departmentsDataError, departmentsData] = yield call(getDepartments);
   if (departmentsData) {
     const departments = departmentsData.departments.departments;
     yield put(setDepartments(departments));
@@ -34,11 +35,9 @@ function* fetchDepartmentsWorker(limit = 5, page = 1) {
 
 function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(start());
-  const [departmentDataError, departmentData] = yield call(
-    api.post,
-    `${DEPARTMENTS}/`,
-    payload
-  );
+  const [departmentDataError, departmentData] = yield call(addDepartment, payload);
+  console.log(payload);
+  
   if (departmentData) {
     const newDepartment = departmentData.department;
     yield put(addNewDepartment(newDepartment));
@@ -50,8 +49,7 @@ function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
 
 function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   const [departmentDataError, departmentData] = yield call(
-    api.get,
-    `${DEPARTMENTS}/${payload}`
+    getDepartment, payload
   );
   if (departmentData) {
     const department = departmentData.departmentByID;
@@ -64,10 +62,7 @@ function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
 function* fetchUpdatedDepartmentWorker({ id, payload }: FetchUpdatedDepartment) {
   yield put(start());
   const [updatedDepartmentDataError, updatedDepartmentData] = yield call(
-    api.patch,
-    `${DEPARTMENTS}/${id}`,
-    payload
-  );
+    updateDepartments, id , payload);
   if (updatedDepartmentData) {
     const updatedDepartment = updatedDepartmentData.updatedDescription;
     yield put(updateDepartment(updatedDepartment));

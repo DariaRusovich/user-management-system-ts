@@ -17,7 +17,7 @@ export const fetchDepartment = (departmentId: string): ActionType => {
 export const setDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.SET_DEPARTMENT, payload: department};
 };
-export const fetchNewDepartment = (department: IDepartment): ActionType => {
+export const createNewDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_NEW_DEPARTMENT, payload: department}
 }
 export const addNewDepartment = (department: IDepartment): ActionType => {

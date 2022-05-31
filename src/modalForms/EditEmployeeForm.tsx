@@ -1,11 +1,10 @@
 import { Formik } from 'formik';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { fetchUpdatedEmployee } from '../redux/employees/actions';
 import { EmployeeData } from '../types/employee';
-
 
 interface EditEmployeeFormProps {
   employee: EmployeeData;
@@ -14,7 +13,7 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
   const dispatch = useDispatch();
   const employeeId = employee._id;
   const { id } = useParams() as { id: string };
-  
+
   const validationsSchema = yup.object().shape({
     firstName: yup
       .string()
@@ -34,16 +33,10 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
     email: yup.string().email().required(),
   });
 
-  const updateEmployee = (values: EmployeeData) => {
-    const updatedEmployee = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      username: values.username,
-      email: values.email,
-      department: id,
-    };
-    dispatch(fetchUpdatedEmployee(employeeId!, updatedEmployee))
-  };
+  const updateEmployee = useCallback((values: EmployeeData) => {
+    const updatedEmployee = { ...values, department: id };
+    dispatch(fetchUpdatedEmployee(employeeId!, updatedEmployee));
+  }, []);
 
   return (
     <Formik
@@ -55,7 +48,7 @@ const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
         department: id,
       }}
       validateOnBlur
-      onSubmit={(values) => updateEmployee(values)}
+      onSubmit={updateEmployee}
       validationSchema={validationsSchema}
     >
       {({
