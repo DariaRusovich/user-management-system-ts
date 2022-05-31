@@ -20,7 +20,7 @@ const LoginForm: FC = () => {
       password: values.password,
     };
     dispatch(fetchTokens(loginData));
-    navigate('/');
+    navigate('/')
   }, [dispatch, navigate]);
 
   if (loading) {

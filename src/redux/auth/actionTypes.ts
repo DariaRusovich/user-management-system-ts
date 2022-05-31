@@ -6,5 +6,3 @@ export enum AuthActionTypes {
     FETCH_TOKENS_END = 'FETCH_TOKENS_END',
     FETCH_TOKENS_ERROR = 'FETCH_TOKENS_ERROR'
 }
-
-//export const FETCH_TOKENS = 'FETCH_TOKENS'

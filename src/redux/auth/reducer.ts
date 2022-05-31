@@ -26,7 +26,6 @@ export const AuthReducer = (
     case AuthActionTypes.FETCH_TOKENS_ERROR: {
       return { ...state, error: action.payload };
     }
-
     default:
       return state;
   }
