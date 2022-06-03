@@ -6,32 +6,27 @@ export interface LoginData {
 }
 
 export interface Tokens {
-  accessToken: null | string;
-  refreshToken: null | string;
+  accessToken:  string;
+  refreshToken: string;
 }
-
 export interface User {
   id: string;
   role: string;
 }
-
 export interface UserData {
   tokens: Tokens;
   user: User;
 }
-
 export interface TokensResponseData {
   user: UserData;
   response?: Error;
 }
-
 export interface TokensData {
   tokens: Tokens;
 }
-
 export interface AuthState {
   loading: boolean;
   error: null | string;
-  tokens: TokensResponseData | null;
-  cookie: TokensResponseData | null;
+  token: TokensResponseData | string;
+  cookie: TokensResponseData | string;
 }

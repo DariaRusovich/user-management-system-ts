@@ -48,7 +48,4 @@ export const DepartmentsReducer = (
       return state;
   }
 };
-// const copiedState = this.state.departments;
-// const updatedDepartments = copiedState.map((department) =>
-//   department._id === updatedDepartment._id ? updatedDepartment : department
-// );
+
