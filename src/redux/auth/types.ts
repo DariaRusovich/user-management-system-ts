@@ -6,7 +6,7 @@ interface FETCH_START {
 }
 interface SET_TOKENS {
   type: AuthActionTypes.SET_TOKENS;
-  payload: TokensResponseData;
+  payload: TokensResponseData | string;
 }
 interface SET_COOKIES {
   type: AuthActionTypes.SET_COOKIES;
@@ -23,8 +23,13 @@ interface FETCH_ERROR {
   type: AuthActionTypes.FETCH_TOKENS_ERROR;
   payload: string;
 }
+export interface NAVIGATE {
+  type: AuthActionTypes.NAVIGATE;
+  navigate: (path: string) => void
+}
 export type ActionType =
   | FETCH_START
+  | NAVIGATE
   | SET_TOKENS
   | SET_COOKIES
   | FETCH_TOKENS
