@@ -17,10 +17,10 @@ function* fetchTokensWorker({ payload }: FETCH_TOKENS) {
   yield put(start());
   const [tokensDataError, tokensData] = yield call(signin, payload);
   if (tokensData) {
-    const accessToken = tokensData.user.tokens?.accessToken;
+    const accessToken = tokensData.user.tokens?.accessToken!;
     const refreshToken = tokensData.user.tokens?.refreshToken;
-    localStorage.setItem('token', accessToken);
-    Cookie.set('refreshToken', refreshToken, 30);
+    console.log(tokensData);
+    
     yield put(setTokens(accessToken));
     yield put(setCookies(refreshToken));
   } else {

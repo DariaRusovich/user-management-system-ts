@@ -4,22 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
 import { authSelector } from '../redux/auth/selectors';
-import { LoginData } from '../types/auth';
+import { LoginData, TokensResponseData } from '../types/auth';
+import { Cookie } from '../utils/cookie';
 import { authValidationsSchema } from '../utils/validation/authValidation';
 import Error from './Error';
 import Loader from './Loader';
 
 const LoginForm: FC = () => {
-  const { tokens, error, loading } = useSelector(authSelector);
+  const { token, error, loading, cookie } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleAuthSubmit = useCallback((values: LoginData) => {
     const loginData: LoginData = {
       username: values.username,
       password: values.password,
     };
     dispatch(fetchTokens(loginData));
+    localStorage.setItem('token', JSON.stringify(token));
+    Cookie.set('refreshToken', cookie, 30);
     navigate('/')
   }, [dispatch, navigate]);
 
