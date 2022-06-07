@@ -7,13 +7,17 @@ interface ModalWindow {
 }
 
 const ModalWindow: FC<ModalWindow> = ({component}) => {
-    const { state } = useContext(ModalContext);
+    const { state, toggleModalClose } = useContext(ModalContext);
     const { open } = state;
+
+  const closeModal = () => {
+    toggleModalClose()
+  }
 
     return (
         <div className={`modal-window ${open ? 'active' : ''}`}>
         <div className="modal-window__content">
-          <button className="modal-close__btn">
+          <button className="modal-close__btn" onClick={closeModal}>
             &#10006;
           </button>
           {component}

@@ -1,13 +1,14 @@
 import { Formik } from 'formik';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useContext } from 'react';
 import { useDispatch } from 'react-redux';
+import { ModalContext } from '../context/ModalContext';
 import { createNewDepartment } from '../redux/departments/actions';
 import { IDepartment } from '../types/departments';
 import { departmentsValidationSchema } from '../utils/validation/departmentsValidation';
 
 const AddDepartmentForm: FC = () => {
+  const { toggleModalClose } = useContext(ModalContext);
   const dispatch = useDispatch();
-
   const createDepartment = useCallback(
     (values: IDepartment) => {
       const newDepartment: IDepartment = {
@@ -17,7 +18,9 @@ const AddDepartmentForm: FC = () => {
     },
     [dispatch]
   );
-
+  const closeModal = () => {
+    toggleModalClose();
+  };
   return (
     <Formik
       initialValues={{ name: '', description: '' }}
@@ -69,7 +72,11 @@ const AddDepartmentForm: FC = () => {
               >
                 Add department
               </button>
-              <button type="reset" className="btn btn-danger">
+              <button
+                type="reset"
+                className="btn btn-danger"
+                onClick={closeModal}
+              >
                 Cancel
               </button>
             </div>

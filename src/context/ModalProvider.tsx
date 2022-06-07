@@ -1,9 +1,8 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import ModalWindow from '../components/ModalWindow';
 import { ModalWindowState } from './interfaces';
 import { ModalContext } from './ModalContext';
 import { ModalReducer } from './ModalReducer';
-
 
 export const initialState: ModalWindowState = {
   open: false,
@@ -24,19 +23,25 @@ export const ModalProvider = ({ children }: AppProviderProps) => {
   const { component } = state;
   console.log(state);
 
+  useEffect(() => {
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') {
+        dispatch({ type: 'CLOSE', payload: null });
+      }
+    });
+  });
+  
   const toggleModalOpen = (component: JSX.Element | null) => {
-   dispatch({ type: 'OPEN', payload: component });
+    dispatch({ type: 'OPEN', payload: component });
   };
 
   const toggleModalClose = () => {
     dispatch({ type: 'CLOSE', payload: null });
-  }
-  
+  };
+
   return (
     <ModalContext.Provider value={{ state, toggleModalOpen, toggleModalClose }}>
-      <ModalWindow
-        component={component}
-      ></ModalWindow>
+      <ModalWindow component={component}></ModalWindow>
       {children}
     </ModalContext.Provider>
   );
