@@ -40,3 +40,6 @@ export function updateEmployees(id: string ,employee: EmployeeData): Promise<Emp
 export function signin(loginData: LoginData): Promise<TokensResponseData[]> {
   return api.post(LOGIN_URL, loginData);
 }
+export function signout() {
+  return api.post(LOGOUT_URL);
+}

@@ -6,7 +6,7 @@ const InitialState: AuthState = {
   token: '',
   cookie: '',
   loading: false,
-  error: null,
+  error: null
 };
 
 export const AuthReducer = (
@@ -19,6 +19,9 @@ export const AuthReducer = (
     }
     case AuthActionTypes.SET_TOKENS: {
       return { ...state, token: action.payload };
+    }
+    case AuthActionTypes.LOGOUT: {
+      return {...state, token: ''}
     }
     case AuthActionTypes.SET_COOKIES: {
       return { ...state, cookie: action.payload };

@@ -12,6 +12,9 @@ interface SET_COOKIES {
   type: AuthActionTypes.SET_COOKIES;
   payload: TokensResponseData;
 }
+export interface LOGOUT {
+  type: AuthActionTypes.LOGOUT;
+}
 export interface FETCH_TOKENS {
   type: AuthActionTypes.FETCH_TOKENS;
   payload?: TokensResponseData;
@@ -32,6 +35,7 @@ export type ActionType =
   | NAVIGATE
   | SET_TOKENS
   | SET_COOKIES
+  | LOGOUT
   | FETCH_TOKENS
   | FETCH_END
   | FETCH_ERROR;

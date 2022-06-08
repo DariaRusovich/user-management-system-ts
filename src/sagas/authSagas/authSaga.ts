@@ -8,7 +8,7 @@ import {
 } from '../../redux/auth/actions';
 import { AuthActionTypes } from '../../redux/auth/actionTypes';
 import { FETCH_TOKENS, NAVIGATE } from '../../redux/auth/types';
-import { signin } from '../../api/apiServise';
+import { signin, signout } from '../../api/apiServise';
 import * as Effects from 'redux-saga/effects';
 import { Cookie } from '../../utils/cookie';
 const call: any = Effects.call;
@@ -29,6 +29,17 @@ function* fetchTokensWorker({ payload }: FETCH_TOKENS) {
   yield put(end());
 }
 
+function* logoutWorker() {
+  yield put(start());
+  const [statusError, status] = yield call(signout);
+  if (status) {
+    localStorage.removeItem('token');
+  } else {
+    yield put(setError(statusError));
+  }
+  yield put(end());
+}
+
 function* navigateWorker(action: NAVIGATE) {
   action.navigate('/');
 }
@@ -36,4 +47,5 @@ function* navigateWorker(action: NAVIGATE) {
 export function* fetchTokensWatcher() {
   yield takeEvery(AuthActionTypes.FETCH_TOKENS, fetchTokensWorker);
   yield takeEvery(AuthActionTypes.NAVIGATE, navigateWorker);
+  yield takeEvery(AuthActionTypes.LOGOUT, logoutWorker);
 }

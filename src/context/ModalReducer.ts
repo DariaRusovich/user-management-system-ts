@@ -5,7 +5,6 @@ type AppActions =
   | { type: 'CLOSE'; payload: JSX.Element | null };
 
 export const ModalReducer = (state: ModalWindowState, action: AppActions): ModalWindowState => {
-  console.log(state);
 
   switch (action.type) {
     case 'OPEN':
