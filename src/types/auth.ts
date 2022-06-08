@@ -21,6 +21,9 @@ export interface TokensResponseData {
   user: UserData;
   response?: Error;
 }
+export interface RefreshTokensResponseData {
+  userData: UserData;
+}
 export interface TokensData {
   tokens: Tokens;
 }

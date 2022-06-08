@@ -1,5 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/urls';
+import { RefreshTokensResponseData, UserData } from '../types/auth';
 
 export const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -21,11 +22,24 @@ api.interceptors.request.use(
   }
 );
 
+
 api.interceptors.response.use(
   (response) => {
     return [null, response.data];
   },
-  (error) => {
+  async (error) => {
+    if (error.response.status === 401 && error.config.url !== 'refresh-token') {
+      const [userError, user] = await api.get<never, RefreshTokensResponseData[]>('refresh-token', {
+        withCredentials: true,
+      });
+      if (!userError) {
+        const { accessToken } = user.userData.tokens
+        localStorage.setItem('token', accessToken);
+        return await api.request(error.config);
+      } else {
+        return [userError, null];
+      }
+    }
     return [error, null];
   }
 );

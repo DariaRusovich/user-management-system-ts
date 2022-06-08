@@ -1,4 +1,4 @@
 export interface ModalWindowState {
-  open: boolean;
+  isOpen: boolean;
   component: JSX.Element | null;
 }

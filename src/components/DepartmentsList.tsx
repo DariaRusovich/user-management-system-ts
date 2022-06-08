@@ -12,8 +12,7 @@ import { ModalContext } from '../context/ModalContext';
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
   const dispatch = useDispatch();
-  const { state, toggleModalOpen } = useContext(ModalContext);
-  const { open } = state;
+  const { toggleModalOpen } = useContext(ModalContext);
 
   useEffect(() => {
     dispatch(fetchDepartments());

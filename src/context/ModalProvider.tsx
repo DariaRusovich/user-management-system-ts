@@ -5,12 +5,12 @@ import { ModalContext } from './ModalContext';
 import { ModalReducer } from './ModalReducer';
 
 export const initialState: ModalWindowState = {
-  open: false,
+  isOpen: false,
   component: null,
 };
 
 export interface ModalState {
-  open: boolean;
+  isOpen: boolean;
   component: JSX.Element | null;
 }
 
@@ -21,7 +21,6 @@ interface AppProviderProps {
 export const ModalProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(ModalReducer, initialState);
   const { component } = state;
-  console.log(state);
 
   useEffect(() => {
     window.addEventListener('keyup', (e) => {
@@ -30,7 +29,7 @@ export const ModalProvider = ({ children }: AppProviderProps) => {
       }
     });
   });
-  
+
   const toggleModalOpen = (component: JSX.Element | null) => {
     dispatch({ type: 'OPEN', payload: component });
   };

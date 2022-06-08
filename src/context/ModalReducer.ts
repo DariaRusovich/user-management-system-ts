@@ -9,9 +9,9 @@ export const ModalReducer = (state: ModalWindowState, action: AppActions): Modal
 
   switch (action.type) {
     case 'OPEN':
-      return { ...state, open: true, component: action.payload };
+      return { ...state, isOpen: true, component: action.payload };
     case 'CLOSE':
-      return { ...state, open: false, component: action.payload };
+      return { ...state, isOpen: false, component: action.payload };
     default:
       return state;
   }
