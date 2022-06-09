@@ -30,6 +30,4 @@ export interface TokensData {
 export interface AuthState {
   loading: boolean;
   error: null | string;
-  token: TokensResponseData | string;
-  cookie: TokensResponseData | string;
 }

@@ -4,14 +4,6 @@ import { TokensResponseData } from '../../types/auth';
 interface FETCH_START {
   type: AuthActionTypes.FETCH_TOKENS_START;
 }
-interface SET_TOKENS {
-  type: AuthActionTypes.SET_TOKENS;
-  payload: TokensResponseData | string;
-}
-interface SET_COOKIES {
-  type: AuthActionTypes.SET_COOKIES;
-  payload: TokensResponseData;
-}
 export interface LOGOUT {
   type: AuthActionTypes.LOGOUT;
 }
@@ -33,8 +25,6 @@ export interface NAVIGATE {
 export type ActionType =
   | FETCH_START
   | NAVIGATE
-  | SET_TOKENS
-  | SET_COOKIES
   | LOGOUT
   | FETCH_TOKENS
   | FETCH_END

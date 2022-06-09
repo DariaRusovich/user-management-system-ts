@@ -1,6 +1,4 @@
 export enum AuthActionTypes {
-  SET_TOKENS = 'SET_TOKENS',
-  SET_COOKIES = 'SET_COOKIES',
   LOGOUT = 'LOGOUT',
   NAVIGATE = 'NAVIGATE',
   FETCH_TOKENS = 'FETCH_TOKENS',

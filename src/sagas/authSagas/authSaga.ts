@@ -1,9 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
   end,
-  setCookies,
   setError,
-  setTokens,
   start,
 } from '../../redux/auth/actions';
 import { AuthActionTypes } from '../../redux/auth/actionTypes';
@@ -19,10 +17,8 @@ function *fetchTokensWorker({ payload }: FETCH_TOKENS) {
   if (tokensData) {
     const accessToken = tokensData.user.tokens.accessToken!;
     const refreshToken = tokensData.user.tokens.refreshToken;
-    yield put(setTokens(accessToken));
-    yield put(setCookies(refreshToken));
-    localStorage.setItem('token', accessToken);
-    Cookie.set('refreshToken', refreshToken, 30);
+    yield localStorage.setItem('token', accessToken);
+    yield Cookie.set('refreshToken', refreshToken, 30);
   } else {
     yield put(setError(tokensDataError));
   }
@@ -33,7 +29,7 @@ function *logoutWorker() {
   yield put(start());
   const [statusError, status] = yield call(signout);
   if (status) {
-    localStorage.removeItem('token');
+    yield localStorage.removeItem('token');
   } else {
     yield put(setError(statusError));
   }
