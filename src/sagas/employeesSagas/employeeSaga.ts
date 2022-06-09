@@ -1,11 +1,13 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
   addEmployee,
+  deleteEmployee,
   getEmployees,
   updateEmployees,
 } from '../../api/apiServise';
 import {
   addNewEmployee,
+  deletedEmployee,
   end,
   setEmployees,
   setError,
@@ -14,6 +16,7 @@ import {
 } from '../../redux/employees/actions';
 import { EmployeesActionTypes } from '../../redux/employees/actionTypes';
 import {
+  FetchDeletedEmployee,
   FetchEmployees,
   FetchNewEmployee,
   FetchUpdatedEmployee,
@@ -60,6 +63,21 @@ function *fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(end());
 }
 
+function *fetchDeletedEmployeeWorker({ payload }: FetchDeletedEmployee) {
+  yield put(start());
+  const [deletedEmployeeDataError, deletedEmployeeData] = yield call(
+    deleteEmployee,
+    payload
+  );
+  if (deletedEmployeeData) {
+    const employeeDeleted = deletedEmployeeData.employeeToDelete
+    yield put(deletedEmployee(employeeDeleted))
+  } else {
+    yield put(setError(deletedEmployeeDataError));
+  }
+  yield put(end());
+}
+
 export function *fetchEmployeeWatcher() {
   yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeesWorker);
   yield takeEvery(
@@ -69,5 +87,9 @@ export function *fetchEmployeeWatcher() {
   yield takeEvery(
     EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE,
     fetchUpdatedEmployeeWorker
+  );
+  yield takeEvery(
+    EmployeesActionTypes.FETCH_DELETED_EMPLOYEE,
+    fetchDeletedEmployeeWorker
   );
 }

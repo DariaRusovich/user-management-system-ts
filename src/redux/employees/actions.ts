@@ -23,6 +23,12 @@ export const addNewEmployee = (employee: EmployeeData): ActionType => {
 export const updateEmployee = (employees: EmployeeData): ActionType => {
   return { type: EmployeesActionTypes.UPDATE_EMPLOYEE, payload: employees };
 };
+export const deletedEmployee = (employees: EmployeeData): ActionType => {
+  return { type: EmployeesActionTypes.DELETE_EMPLOYEE, payload: employees }
+};
+export const fetchDeletedEmployee = (id: string) => {
+  return { type: EmployeesActionTypes.FETCH_DELETED_EMPLOYEE, payload: id }
+};
 export const setError = (error: string): ActionType => {
   return { type: EmployeesActionTypes.FETCH_EMPLOYEES_ERROR, payload: error };
 };

@@ -24,10 +24,17 @@ export const EmployeesReducer = (
     }
     case EmployeesActionTypes.UPDATE_EMPLOYEE: {
       const copiedState = state.employees;
-      const updatedEmployees = copiedState.map((employee) => {
-      return employee._id === action.payload._id ? action.payload : employee
-    });
+      const updatedEmployees = copiedState.map(employee => {
+        return employee._id === action.payload._id ? action.payload : employee;
+      });
       return { ...state, employees: updatedEmployees };
+    }
+    case EmployeesActionTypes.DELETE_EMPLOYEE: {
+      const copiedState = state.employees;
+      const employees = copiedState.filter(employee => {
+        return employee._id !== action.payload._id;
+      });
+      return { ...state, employees };
     }
     case EmployeesActionTypes.FETCH_EMPLOYEES_ERROR: {
       return { ...state, error: action.payload };

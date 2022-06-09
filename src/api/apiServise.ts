@@ -33,7 +33,6 @@ export function updateDepartments(
 export function deleteDepartment(id: string): Promise<IDepartment> {
   return api.delete(`${DEPARTMENTS}/${id}`);
 }
-
 export function getDepartment(id: string): Promise<IDepartment> {
   return api.get(`${DEPARTMENTS}/${id}`);
 }
@@ -48,6 +47,9 @@ export function updateEmployees(
   employee: EmployeeData
 ): Promise<Employees> {
   return api.patch(`${EMPLOYEES_URL}/${id}`, employee);
+}
+export function deleteEmployee(id: string) {
+  return api.delete(`${EMPLOYEES_URL}/${id}`)
 }
 export function signin(loginData: LoginData): Promise<TokensResponseData[]> {
   return api.post(LOGIN_URL, loginData);

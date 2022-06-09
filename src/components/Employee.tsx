@@ -1,5 +1,7 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import EditEmployeeForm from '../modalForms/EditEmployeeForm';
+import { fetchDeletedEmployee } from '../redux/employees/actions';
 import { EmployeeData } from '../types/employee';
 
 interface EmployeeProps {
@@ -7,7 +9,13 @@ interface EmployeeProps {
 }
 
 const Employee: FC<EmployeeProps> = ({ employee }) => {
-  const { username, email, firstName, lastName } = employee
+  const dispatch = useDispatch()
+  const { username, email, firstName, lastName, _id } = employee
+
+  const handleDeleteEmployee = () => {
+    dispatch(fetchDeletedEmployee(_id!))
+  }
+
   return (
     <div className="employee-item item-block">
       <EditEmployeeForm employee={employee}/>
@@ -31,7 +39,7 @@ const Employee: FC<EmployeeProps> = ({ employee }) => {
       </a>
       <div className="btns-group">
         <button className="btn btn-primary">Edit</button>
-        <button className="btn btn-danger">Delete</button>
+        <button onClick={handleDeleteEmployee} className="btn btn-danger">Delete</button>
       </div>
     </div>
   );
