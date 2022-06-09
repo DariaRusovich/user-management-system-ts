@@ -1,21 +1,24 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
+  addDepartment,
+  deleteDepartment,
   getDepartment,
   getDepartments,
   updateDepartments,
-  addDepartment,
 } from '../../api/apiServise';
 import {
-  start,
-  end,
-  setDepartments,
-  setDepartment,
-  setError,
   addNewDepartment,
+  deletedDepartment,
+  end,
+  setDepartment,
+  setDepartments,
+  setError,
+  start,
   updateDepartment,
 } from '../../redux/departments/actions';
 import { DepartmentsActionTypes } from '../../redux/departments/actionTypes';
 import {
+  FetchDeletedDepartment,
   FetchDepartment,
   FetchNewDepartment,
   FetchUpdatedDepartment,
@@ -23,7 +26,7 @@ import {
 import * as Effects from 'redux-saga/effects';
 const call: any = Effects.call;
 
-function* fetchDepartmentsWorker() {
+function *fetchDepartmentsWorker() {
   yield put(start());
   const [departmentsDataError, departmentsData] = yield call(getDepartments);
   if (departmentsData) {
@@ -35,7 +38,7 @@ function* fetchDepartmentsWorker() {
   yield put(end());
 }
 
-function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
+function *fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(start());
   const [departmentDataError, departmentData] = yield call(
     addDepartment,
@@ -50,7 +53,7 @@ function* fetchNewDepartmentWorker({ payload }: FetchNewDepartment) {
   yield put(end());
 }
 
-function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
+function *fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   const [departmentDataError, departmentData] = yield call(
     getDepartment,
     payload
@@ -63,7 +66,7 @@ function* fetchOneDepartmentWorker({ payload }: FetchDepartment) {
   }
 }
 
-function* fetchUpdatedDepartmentWorker({
+function *fetchUpdatedDepartmentWorker({
   id,
   payload,
 }: FetchUpdatedDepartment) {
@@ -82,7 +85,22 @@ function* fetchUpdatedDepartmentWorker({
   yield put(end());
 }
 
-export function* fetchDepartmentsWatcher() {
+function *deleteDepartmentWorker({ payload }: FetchDeletedDepartment) {
+  yield put(start());
+  const [departmentDeletedErrorData, departmentDeletedData] = yield call(
+    deleteDepartment,
+    payload
+  );
+  if (departmentDeletedData) {
+    const departmentDeleted = departmentDeletedData.departmentToDelete;
+    yield put(deletedDepartment(departmentDeleted));
+  } else {
+    yield put(setError(departmentDeletedErrorData));
+  }
+  yield put(end());
+}
+
+export function *fetchDepartmentsWatcher() {
   yield takeEvery(
     DepartmentsActionTypes.FETCH_DEPARTMENTS,
     fetchDepartmentsWorker
@@ -98,5 +116,9 @@ export function* fetchDepartmentsWatcher() {
   yield takeEvery(
     DepartmentsActionTypes.FETCH_UPDATED_DEPARTMENT,
     fetchUpdatedDepartmentWorker
+  );
+  yield takeEvery(
+    DepartmentsActionTypes.FETCH_DELETED_DEPARTMENT,
+    deleteDepartmentWorker
   );
 }

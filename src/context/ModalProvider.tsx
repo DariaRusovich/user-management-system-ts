@@ -23,7 +23,7 @@ export const ModalProvider = ({ children }: AppProviderProps) => {
   const { component } = state;
 
   useEffect(() => {
-    window.addEventListener('keyup', (e) => {
+    window.addEventListener('keyup', e => {
       if (e.key === 'Escape') {
         dispatch({ type: 'CLOSE', payload: null });
       }

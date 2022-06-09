@@ -1,11 +1,13 @@
-import { ModalWindowState } from "./interfaces";
+import { ModalWindowState } from './interfaces';
 
 type AppActions =
-  | { type: 'OPEN'; payload: JSX.Element | null }
-  | { type: 'CLOSE'; payload: JSX.Element | null };
+  | { type: 'OPEN'; payload: JSX.Element | null; }
+  | { type: 'CLOSE'; payload: JSX.Element | null; };
 
-export const ModalReducer = (state: ModalWindowState, action: AppActions): ModalWindowState => {
-
+export const ModalReducer = (
+  state: ModalWindowState,
+  action: AppActions
+): ModalWindowState => {
   switch (action.type) {
     case 'OPEN':
       return { ...state, isOpen: true, component: action.payload };

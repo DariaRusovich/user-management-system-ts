@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import AddEmployeeForm from '../modalForms/AddEmployeeForm';
 import { fetchDepartment } from '../redux/departments/actions';
 import { departmentsSelector } from '../redux/departments/selectors';
@@ -13,7 +13,7 @@ import Loader from './Loader';
 const EmployeesList = () => {
   const { employees, error, loading } = useSelector(employeesSelector);
   const { department } = useSelector(departmentsSelector);
-  const { id } = useParams() as { id: string };
+  const { id } = useParams() as { id: string; };
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,7 +34,8 @@ const EmployeesList = () => {
       <div className="container section-wrap">
         <AddEmployeeForm id={id}></AddEmployeeForm>
         <h1 className="title-secondary">
-          {employees.length} employees in the <span>{department.name}</span> department <br />
+          {employees.length} employees in the <span>{department.name}</span>{' '}
+          department <br />
           <Link to="/" className="title">
             Go back
           </Link>
@@ -43,7 +44,7 @@ const EmployeesList = () => {
           <button className="btn btn-success">+ Add employee</button>
         </div>
         <div className="item-list">
-          {employees.map((employee) => (
+          {employees.map(employee => (
             <Employee key={employee._id} employee={employee} />
           ))}
         </div>

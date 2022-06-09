@@ -5,8 +5,7 @@ import { authSelector } from '../redux/auth/selectors';
 
 const LogoutBtn = () => {
   const dispatch = useDispatch();
-  const { } = useSelector(authSelector);
-  
+  const {} = useSelector(authSelector);
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(removeToken());

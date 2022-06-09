@@ -15,7 +15,7 @@ export const fetchNewEmployee = (employee: EmployeeData) => {
   return { type: EmployeesActionTypes.FETCH_NEW_EMPLOYEE, payload: employee };
 };
 export const fetchUpdatedEmployee = (id: string, updatedEmployee: EmployeeData): ActionType => {
-  return { type: EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE, id, payload: updatedEmployee};
+  return { type: EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE, id, payload: updatedEmployee };
 };
 export const addNewEmployee = (employee: EmployeeData): ActionType => {
   return { type: EmployeesActionTypes.ADD_EMPLOYEE, payload: employee };

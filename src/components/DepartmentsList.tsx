@@ -8,7 +8,6 @@ import Error from './Error';
 import Loader from './Loader';
 import { ModalContext } from '../context/ModalContext';
 
-
 const DepartmentsList: FC = () => {
   const { departments, error, loading } = useSelector(departmentsSelector);
   const dispatch = useDispatch();
@@ -18,9 +17,9 @@ const DepartmentsList: FC = () => {
     dispatch(fetchDepartments());
   }, [dispatch]);
 
- const openModal = () => {
-   toggleModalOpen(<AddDepartmentForm></AddDepartmentForm>)
- }
+  const openModal = () => {
+    toggleModalOpen(<AddDepartmentForm></AddDepartmentForm>);
+  };
 
   // if (error) {
   //   return <Error />;
@@ -40,7 +39,7 @@ const DepartmentsList: FC = () => {
           <div className="form-wrap"></div>
         </div>
         <div className="item-list">
-          {departments.map((department) => (
+          {departments.map(department => (
             <Department key={department._id} department={department} />
           ))}
         </div>

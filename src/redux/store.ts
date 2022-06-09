@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux"
+import { applyMiddleware, combineReducers, createStore } from "redux"
 import { AuthReducer } from "./auth/reducer";
 import { DepartmentsReducer } from "./departments/reducer";
 import { EmployeesReducer } from "./employees/reducer";
@@ -10,10 +10,10 @@ const sagaMiddleware = createSagaMiddleware()
 export const rootReducer = combineReducers({
     departments: DepartmentsReducer,
     employees: EmployeesReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
 })
 export type rootState = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer,  applyMiddleware(sagaMiddleware))
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
 
 sagaMiddleware.run(rootWatcher)

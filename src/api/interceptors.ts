@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { BASE_URL } from '../constants/urls';
 import { RefreshTokensResponseData } from '../types/auth';
 
@@ -34,7 +34,7 @@ api.interceptors.response.use(
       >('refresh-token', {
         withCredentials: true,
       });
-      if (!userError) {
+      if (user) {
         const { accessToken } = user.userData.tokens;
         localStorage.setItem('token', accessToken);
         return await api.request(error.config);

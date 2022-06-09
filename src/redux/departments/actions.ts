@@ -12,22 +12,47 @@ export const fetchDepartments = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_DEPARTMENTS };
 };
 export const fetchDepartment = (departmentId: string): ActionType => {
-  return { type: DepartmentsActionTypes.FETCH_DEPARTMENT, payload: departmentId};
+  return {
+    type: DepartmentsActionTypes.FETCH_DEPARTMENT,
+    payload: departmentId,
+  };
 };
 export const setDepartment = (department: IDepartment): ActionType => {
-  return { type: DepartmentsActionTypes.SET_DEPARTMENT, payload: department};
+  return { type: DepartmentsActionTypes.SET_DEPARTMENT, payload: department };
 };
 export const createNewDepartment = (department: IDepartment): ActionType => {
-  return { type: DepartmentsActionTypes.FETCH_NEW_DEPARTMENT, payload: department}
-}
+  return {
+    type: DepartmentsActionTypes.FETCH_NEW_DEPARTMENT,
+    payload: department,
+  };
+};
 export const addNewDepartment = (department: IDepartment): ActionType => {
   return { type: DepartmentsActionTypes.ADD_DEPARTMENT, payload: department };
 };
-export const fetchUpdatedDepartment = (id: string ,updatedDepartment: IDepartment): ActionType => {
-  return { type: DepartmentsActionTypes.FETCH_UPDATED_DEPARTMENT, id, payload: updatedDepartment}
-}
+export const fetchUpdatedDepartment = (
+  id: string,
+  updatedDepartment: IDepartment
+): ActionType => {
+  return {
+    type: DepartmentsActionTypes.FETCH_UPDATED_DEPARTMENT,
+    id,
+    payload: updatedDepartment,
+  };
+};
 export const updateDepartment = (departments: IDepartment): ActionType => {
-  return { type: DepartmentsActionTypes.UPDATE_DEPARTMENT, payload: departments };
+  return {
+    type: DepartmentsActionTypes.UPDATE_DEPARTMENT,
+    payload: departments,
+  };
+};
+export const deletedDepartment = (departments: IDepartment): ActionType => {
+  return {
+    type: DepartmentsActionTypes.DELETE_DEPARTMENT,
+    payload: departments,
+  };
+};
+export const fetchDeletedDepartment = (id: string): ActionType => {
+  return { type: DepartmentsActionTypes.FETCH_DELETED_DEPARTMENT, payload: id };
 };
 export const setError = (error: string): ActionType => {
   return {
@@ -38,4 +63,3 @@ export const setError = (error: string): ActionType => {
 export const end = (): ActionType => {
   return { type: DepartmentsActionTypes.FETCH_DEPARTMENTS_END };
 };
-

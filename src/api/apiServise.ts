@@ -19,12 +19,21 @@ export function getDepartments(
 ): Promise<DepartmentsData[]> {
   return api.get(`${DEPARTMENTS}/?limit=${limit}&page=${page}`);
 }
-export function addDepartment(department: IDepartment): Promise<DepartmentData[]> {
+export function addDepartment(
+  department: IDepartment
+): Promise<DepartmentData[]> {
   return api.post(`${DEPARTMENTS}/`, department);
 }
-export function updateDepartments(id: string, department: IDepartment): Promise<DepartmentData[]> {
+export function updateDepartments(
+  id: string,
+  department: IDepartment
+): Promise<DepartmentData[]> {
   return api.patch(`${DEPARTMENTS}/${id}`, department);
 }
+export function deleteDepartment(id: string): Promise<IDepartment> {
+  return api.delete(`${DEPARTMENTS}/${id}`);
+}
+
 export function getDepartment(id: string): Promise<IDepartment> {
   return api.get(`${DEPARTMENTS}/${id}`);
 }
@@ -34,7 +43,10 @@ export function getEmployees(id: string): Promise<Employees[]> {
 export function addEmployee(employee: EmployeeData): Promise<Employees> {
   return api.post(`${EMPLOYEES_URL}`, employee);
 }
-export function updateEmployees(id: string ,employee: EmployeeData): Promise<Employees> {
+export function updateEmployees(
+  id: string,
+  employee: EmployeeData
+): Promise<Employees> {
   return api.patch(`${EMPLOYEES_URL}/${id}`, employee);
 }
 export function signin(loginData: LoginData): Promise<TokensResponseData[]> {

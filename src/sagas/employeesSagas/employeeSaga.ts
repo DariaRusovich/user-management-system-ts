@@ -1,15 +1,15 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
-  getEmployees,
   addEmployee,
+  getEmployees,
   updateEmployees,
 } from '../../api/apiServise';
 import {
-  start,
+  addNewEmployee,
   end,
   setEmployees,
   setError,
-  addNewEmployee,
+  start,
   updateEmployee,
 } from '../../redux/employees/actions';
 import { EmployeesActionTypes } from '../../redux/employees/actionTypes';
@@ -21,7 +21,7 @@ import {
 import * as Effects from 'redux-saga/effects';
 const call: any = Effects.call;
 
-function* fetchEmployeesWorker({ payload }: FetchEmployees) {
+function *fetchEmployeesWorker({ payload }: FetchEmployees) {
   yield put(start());
   const [employeesDataError, employeesData] = yield call(getEmployees, payload);
   if (employeesData) {
@@ -33,7 +33,7 @@ function* fetchEmployeesWorker({ payload }: FetchEmployees) {
   yield put(end());
 }
 
-function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
+function *fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   yield put(start());
   const [employeeDataError, employeeData] = yield call(addEmployee, payload);
   if (employeeData) {
@@ -44,7 +44,7 @@ function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   }
   yield put(end());
 }
-function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
+function *fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(start());
   const [updatedEmployeeDataError, updatedEmployeeData] = yield call(
     updateEmployees,
@@ -60,7 +60,7 @@ function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(end());
 }
 
-export function* fetchEmployeeWatcher() {
+export function *fetchEmployeeWatcher() {
   yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeesWorker);
   yield takeEvery(
     EmployeesActionTypes.FETCH_NEW_EMPLOYEE,
