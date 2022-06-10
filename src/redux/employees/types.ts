@@ -29,6 +29,14 @@ export interface UpdatedEmployee {
   type: EmployeesActionTypes.UPDATE_EMPLOYEE;
   payload: EmployeeData;
 }
+export interface DeleteEmployee {
+  type: EmployeesActionTypes.DELETE_EMPLOYEE;
+  payload: EmployeeData;
+}
+export interface FetchDeletedEmployee {
+  type: EmployeesActionTypes.FETCH_DELETED_EMPLOYEE;
+  payload: string;
+}
 interface FetchError {
   type: EmployeesActionTypes.FETCH_EMPLOYEES_ERROR;
   payload: string;
@@ -41,6 +49,8 @@ export type ActionType =
   | SetEmployees
   | AddEmployee
   | UpdatedEmployee
+  | DeleteEmployee
+  | FetchDeletedEmployee
   | FetchNewEmployee
   | FetchUpdatedEmployee
   | FetchEmployees

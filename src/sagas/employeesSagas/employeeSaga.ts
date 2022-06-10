@@ -1,19 +1,22 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
-  getEmployees,
   addEmployee,
+  deleteEmployee,
+  getEmployees,
   updateEmployees,
 } from '../../api/apiServise';
 import {
-  start,
+  addNewEmployee,
+  deletedEmployee,
   end,
   setEmployees,
   setError,
-  addNewEmployee,
+  start,
   updateEmployee,
 } from '../../redux/employees/actions';
 import { EmployeesActionTypes } from '../../redux/employees/actionTypes';
 import {
+  FetchDeletedEmployee,
   FetchEmployees,
   FetchNewEmployee,
   FetchUpdatedEmployee,
@@ -21,7 +24,7 @@ import {
 import * as Effects from 'redux-saga/effects';
 const call: any = Effects.call;
 
-function* fetchEmployeesWorker({ payload }: FetchEmployees) {
+function *fetchEmployeesWorker({ payload }: FetchEmployees) {
   yield put(start());
   const [employeesDataError, employeesData] = yield call(getEmployees, payload);
   if (employeesData) {
@@ -33,7 +36,7 @@ function* fetchEmployeesWorker({ payload }: FetchEmployees) {
   yield put(end());
 }
 
-function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
+function *fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   yield put(start());
   const [employeeDataError, employeeData] = yield call(addEmployee, payload);
   if (employeeData) {
@@ -44,7 +47,7 @@ function* fetchNewEmployeeWorker({ payload }: FetchNewEmployee) {
   }
   yield put(end());
 }
-function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
+function *fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(start());
   const [updatedEmployeeDataError, updatedEmployeeData] = yield call(
     updateEmployees,
@@ -60,7 +63,22 @@ function* fetchUpdatedEmployeeWorker({ id, payload }: FetchUpdatedEmployee) {
   yield put(end());
 }
 
-export function* fetchEmployeeWatcher() {
+function *fetchDeletedEmployeeWorker({ payload }: FetchDeletedEmployee) {
+  yield put(start());
+  const [deletedEmployeeDataError, deletedEmployeeData] = yield call(
+    deleteEmployee,
+    payload
+  );
+  if (deletedEmployeeData) {
+    const employeeDeleted = deletedEmployeeData.employeeToDelete
+    yield put(deletedEmployee(employeeDeleted))
+  } else {
+    yield put(setError(deletedEmployeeDataError));
+  }
+  yield put(end());
+}
+
+export function *fetchEmployeeWatcher() {
   yield takeEvery(EmployeesActionTypes.FETCH_EMPLOYEES, fetchEmployeesWorker);
   yield takeEvery(
     EmployeesActionTypes.FETCH_NEW_EMPLOYEE,
@@ -69,5 +87,9 @@ export function* fetchEmployeeWatcher() {
   yield takeEvery(
     EmployeesActionTypes.FETCH_UPDATED_EMPLOYEE,
     fetchUpdatedEmployeeWorker
+  );
+  yield takeEvery(
+    EmployeesActionTypes.FETCH_DELETED_EMPLOYEE,
+    fetchDeletedEmployeeWorker
   );
 }

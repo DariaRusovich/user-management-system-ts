@@ -1,34 +1,47 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import {
-  start,
   end,
-  setTokens,
-  setCookies,
   setError,
+  start,
 } from '../../redux/auth/actions';
 import { AuthActionTypes } from '../../redux/auth/actionTypes';
-import { Cookie } from '../../utils/cookie';
-import { FETCH_TOKENS } from '../../redux/auth/types';
-import { signin } from '../../api/apiServise';
+import { FETCH_TOKENS, NAVIGATE } from '../../redux/auth/types';
+import { signin, signout } from '../../api/apiServise';
 import * as Effects from 'redux-saga/effects';
+import { Cookie } from '../../utils/cookie';
 const call: any = Effects.call;
 
-function* fetchTokensWorker({ payload }: FETCH_TOKENS) {
+function *fetchTokensWorker({ payload }: FETCH_TOKENS) {
   yield put(start());
   const [tokensDataError, tokensData] = yield call(signin, payload);
   if (tokensData) {
-    const accessToken = tokensData.user.tokens?.accessToken!;
-    const refreshToken = tokensData.user.tokens?.refreshToken;
-    console.log(tokensData);
-    
-    yield put(setTokens(accessToken));
-    yield put(setCookies(refreshToken));
+    const accessToken = tokensData.user.tokens.accessToken!;
+    const refreshToken = tokensData.user.tokens.refreshToken;
+    yield localStorage.setItem('token', accessToken);
+    yield Cookie.set('refreshToken', refreshToken, 30);
   } else {
     yield put(setError(tokensDataError));
   }
   yield put(end());
 }
 
-export function* fetchTokensWatcher() {
+function *logoutWorker() {
+  yield put(start());
+  const [statusError, status] = yield call(signout);
+  if (status) {
+    yield localStorage.removeItem('token');
+  } else {
+    yield put(setError(statusError));
+  }
+  yield put(end());
+}
+
+function *navigateWorker(action: NAVIGATE) {
+  action.navigate('/');
+}
+
+export function *fetchTokensWatcher() {
   yield takeEvery(AuthActionTypes.FETCH_TOKENS, fetchTokensWorker);
+  yield takeEvery(AuthActionTypes.NAVIGATE, navigateWorker);
+  yield takeEvery(AuthActionTypes.LOGOUT, logoutWorker);
 }

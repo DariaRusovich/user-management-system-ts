@@ -21,12 +21,13 @@ export interface TokensResponseData {
   user: UserData;
   response?: Error;
 }
+export interface RefreshTokensResponseData {
+  userData: UserData;
+}
 export interface TokensData {
   tokens: Tokens;
 }
 export interface AuthState {
   loading: boolean;
   error: null | string;
-  token: TokensResponseData | string;
-  cookie: TokensResponseData | string;
 }

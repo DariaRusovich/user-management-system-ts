@@ -3,9 +3,9 @@ import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchTokens } from '../redux/auth/actions';
+import { AuthActionTypes } from '../redux/auth/actionTypes';
 import { authSelector } from '../redux/auth/selectors';
-import { LoginData, TokensResponseData } from '../types/auth';
-import { Cookie } from '../utils/cookie';
+import { LoginData } from '../types/auth';
 import { authValidationsSchema } from '../utils/validation/authValidation';
 import Error from './Error';
 import Loader from './Loader';
@@ -14,16 +14,17 @@ const LoginForm: FC = () => {
   const { token, error, loading, cookie } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleAuthSubmit = useCallback((values: LoginData) => {
-    const loginData: LoginData = {
-      username: values.username,
-      password: values.password,
-    };
-    dispatch(fetchTokens(loginData));
-    localStorage.setItem('token', JSON.stringify(token));
-    Cookie.set('refreshToken', cookie, 30);
-    navigate('/')
-  }, [dispatch, navigate]);
+  const handleAuthSubmit = useCallback(
+    (values: LoginData) => {
+      const loginData: LoginData = {
+        username: values.username,
+        password: values.password,
+      };
+      dispatch(fetchTokens(loginData));
+      dispatch({ type: AuthActionTypes.NAVIGATE, navigate });
+    },
+    [dispatch, navigate]
+  );
 
   if (loading) {
     return <Loader />;

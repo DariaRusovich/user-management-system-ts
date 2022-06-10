@@ -12,7 +12,7 @@ interface EditEmployeeFormProps {
 const EditEmployeeForm: FC<EditEmployeeFormProps> = ({ employee }) => {
   const dispatch = useDispatch();
   const employeeId = employee._id;
-  const { id } = useParams() as { id: string };
+  const { id } = useParams() as { id: string; };
 
   const updateEmployee = useCallback((values: EmployeeData) => {
     const updatedEmployee = { ...values, department: id };

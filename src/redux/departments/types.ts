@@ -37,6 +37,14 @@ interface UpdateDepartment {
   type: DepartmentsActionTypes.UPDATE_DEPARTMENT;
   payload: IDepartment;
 }
+export interface DeleteDepartment {
+  type: DepartmentsActionTypes.DELETE_DEPARTMENT;
+  payload: IDepartment;
+}
+export interface FetchDeletedDepartment {
+  type: DepartmentsActionTypes.FETCH_DELETED_DEPARTMENT;
+  payload: string,
+}
 interface FetchError {
   type: DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR;
   payload: string;
@@ -55,4 +63,6 @@ export type ActionType =
   | FetchError
   | FetchEnd
   | AddDepartment
+  | DeleteDepartment
+  | FetchDeletedDepartment
   | UpdateDepartment;

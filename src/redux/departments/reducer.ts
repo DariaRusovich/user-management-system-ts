@@ -32,10 +32,17 @@ export const DepartmentsReducer = (
     }
     case DepartmentsActionTypes.UPDATE_DEPARTMENT: {
       const copiedState = state.departments;
-      const updatedDepartments = copiedState.map((department) =>
-        department._id === action.payload._id ? action.payload : department
-      );
+      const updatedDepartments = copiedState.map(department => {
+      return department._id === action.payload._id ? action.payload : department
+    });
       return { ...state, departments: updatedDepartments };
+    }
+    case DepartmentsActionTypes.DELETE_DEPARTMENT: {
+      const copiedState = state.departments;
+      const departments = copiedState.filter(department => {
+        return department._id !== action.payload._id;
+      });
+      return { ...state, departments };
     }
     case DepartmentsActionTypes.FETCH_DEPARTMENTS_ERROR: {
       return { ...state, error: action.payload };
@@ -48,4 +55,3 @@ export const DepartmentsReducer = (
       return state;
   }
 };
-
